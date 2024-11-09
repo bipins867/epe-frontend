@@ -1,0 +1,200 @@
+/* Container and section styles */
+.project-area {
+    padding: 50px 0;
+    background-color: #f9f9f9;
+  }
+  
+  .project-title h1 {
+    color: #00056b;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .project-button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+  }
+  
+  .project-button-group button {
+    padding: 10px 20px;
+    background-color: #00056b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .project-button-group button:hover,
+  .project-button-group button.active {
+    background-color: #f07e1a;
+  }
+  
+  /* Grid layout for cards */
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  .project-image-item {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .img {
+    position: relative;
+    height: 300px;  /* Fixed height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .img img {
+    width: auto;    /* Image width adjusts automatically */
+    height: 100%;   /* Image will stretch to fit the height */
+    object-fit: cover; /* Ensures the image covers the area without stretching */
+  }
+  
+  .hover-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);  /* Dark overlay for text readability */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+  }
+  
+  .project-image-item:hover .hover-text {
+    opacity: 1; /* Show the content on hover */
+  }
+  
+  .project-image-item:hover .img img {
+    display: none; /* Hide the image on hover */
+  }
+  
+  h4.text-uppercase {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    z-index: 1;
+    font-size: 1.25rem;
+  }
+  
+  p.text-secondary {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: white;
+    z-index: 1;
+    font-size: 1rem;
+  }
+  
+  
+  /* Ensure the image and hover content area takes the full space */
+  .our-project {
+    position: relative;
+  }
+  
+  .img {
+    position: relative;
+    height: 300px;  /* Fixed height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .img img {
+    width: auto;    /* Image width adjusts automatically */
+    height: 100%;   /* Image will stretch to fit the height */
+    object-fit: cover; /* Ensures the image covers the area without stretching */
+  }
+
+
+  /* Title styles for images */
+  .img .text-center h4 {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: absolute; /* Position title over the image */
+    z-index: 1;
+  }
+  
+.hover-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);  /* Dark overlay for text readability */
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 20px;
+}
+  
+.project-image-item:hover .hover-text {
+    opacity: 1; /* Show the content on hover */
+  }
+  
+  .project-image-item:hover .img img {
+    display: none; /* Hide the image on hover */
+  }
+  
+  h4.text-uppercase {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: rgb(160, 0, 0);
+    z-index: 1;
+    font-size: 1.25rem;
+  }
+  
+  p.text-secondary {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: rgb(85, 104, 0);
+    z-index: 1;
+    font-size: 1rem;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .project-image-item {
+      width: calc(50% - 20px); /* 2 items per row on mobile */
+    }
+  
+    .img {
+      height: 180px; /* Adjust image height for mobile */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .project-image-item {
+      width: 100%; /* 1 item per row on very small screens */
+    }
+  
+    .img {
+      height: 160px; /* Adjust image height for very small screens */
+    }
+  }
+  

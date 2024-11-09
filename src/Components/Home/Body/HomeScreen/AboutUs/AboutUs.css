@@ -1,0 +1,63 @@
+/* Styling for About Us Section */
+.about-us-section {
+    padding: 3rem 1rem;
+    background-color: #f8f9fa;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #00056b;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .about-img {
+    height: 250px;  /* Fixed image height */
+    width: auto;    /* Auto width to maintain aspect ratio */
+    object-fit: contain; /* Ensures the image maintains its aspect ratio and fits within the height */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Elevation effect */
+  }
+  
+  .about-card {
+    border: none;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Card elevation */
+    border-radius: 8px; /* Rounded corners for the card */
+    transition: transform 0.3s ease;  /* Smooth transition on hover */
+  }
+  
+  .about-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+  }
+  
+  .card-title {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #00056b;
+    margin-bottom: 1rem;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  /* Responsive styling */
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 2rem;
+    }
+    
+    .about-card {
+      text-align: center;
+      padding: 1rem;
+    }
+  
+    .about-img {
+      height: 200px;  /* Slightly smaller image size on smaller screens */
+    }
+  }
+  
