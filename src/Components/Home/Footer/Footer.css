@@ -1,0 +1,61 @@
+.footer-area {
+    background-color: #00056B; /* Dark blue background */
+  }
+  
+  .footer-logo {
+    width: 100%;
+    max-width: 200px;
+    margin-bottom: 10px;
+  }
+  
+  .btn-social {
+    font-size: 1.2rem;
+    margin-right: 10px;
+    color: #fff;
+  }
+  
+  .footer-link {
+    display: block;
+    color: #ddd;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-link:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+  
+  .newsletter-text {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .newsletter-form {
+    position: relative;
+  }
+  
+  .newsletter-form .form-control {
+    padding-right: 45px;
+    border: none;
+    height: 48px;
+  }
+  
+  .newsletter-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    padding: 0 15px;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    font-size: 1.2rem;
+  }
+  
+  .footer-bottom {
+    background-color: #00056B;
+    color: #ccc;
+    font-size: 0.9rem;
+  }
+  
