@@ -1,0 +1,111 @@
+/* General Page Styles */
+.activate-account-page {
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    position: relative;
+  }
+  
+  .activate-account-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://img.freepik.com/free-vector/gradient-technological-background_23-2148884155.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(6px);
+    z-index: -1;
+  }
+  
+  .activate-account-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Left Content Section */
+  .activate-account-left {
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 50px;
+    border-radius: 10px;
+  }
+  
+  .activate-account-left .content-box {
+    text-align: center;
+  }
+  
+  .activate-account-left h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .activate-account-left p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+  }
+  
+  .activate-account-left .activate-account-illustration {
+    max-width: 80%;
+    height: auto;
+    margin-top: 20px;
+  }
+  
+  /* Right Account Activation Form Section */
+  .activate-account-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Card Styles */
+  .activate-account-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .activate-account-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  
+  .activate-account-card .form-label {
+    font-weight: bold;
+  }
+  
+  .error-message {
+    font-size: 0.9rem;
+    margin-top: 10px;
+  }
+  
+  .success-message {
+    font-size: 0.9rem;
+    margin-top: 10px;
+    color: green;
+  }
+  
+  /* Button Styles */
+  button {
+    transition: all 0.3s ease;
+  }
+  
+  button:disabled {
+    cursor: not-allowed;
+  }
+  
+  .login-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .login-link:hover {
+    text-decoration: underline;
+  }
+  
