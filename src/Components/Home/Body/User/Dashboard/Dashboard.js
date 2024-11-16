@@ -3,7 +3,7 @@ import { PiggyBox } from "./PiggyBox/PiggyBox";
 import { Kit } from "./Kit/Kit";
 import { Referral } from "./Referral/Referral";
 import { Loans } from "./Loans/Loans";
-import { RequestWithdrawal } from "./RequestWithdrawal/RequestWithdrawal";
+import { Withdrawal } from "./Withdrawal/Withdrawal";
 import { TransferMoney } from "./TransferMoney/TransferMoney";
 import { Settlement } from "./Settlement/Settlement";
 import { SavedAddress } from "./SavedAddress/SavedAddress";
@@ -20,7 +20,7 @@ export const Dashboard = () => {
         <Route path="piggyBox" element={<PiggyBox />} />
         <Route path="referral" element={<Referral />} />
         <Route path="loans" element={<Loans />} />
-        <Route path="requestWithdrawal" element={<RequestWithdrawal />} />
+        <Route path="Withdrawal" element={<Withdrawal />} />
         <Route path="transferMoney" element={<TransferMoney />} />
         <Route path="settlement" element={<Settlement />} />
         <Route path="savedAddress" element={<SavedAddress />} />

@@ -7,8 +7,8 @@ export const Body = () => {
     <>
       <Routes>
         <Route path="auth" element={<Auth />} />
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="*" element={<Navigate to="dashboard" replace />} />
+        <Route path="/*" element={<Dashboard />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
   );
