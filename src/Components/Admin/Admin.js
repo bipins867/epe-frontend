@@ -1,7 +1,13 @@
+import { Body } from "./Body/Body";
+import { Footer } from "./Footer/Footer";
+import { Header } from "./Header/Header";
+
 export const Admin = () => {
   return (
     <>
-      <h1>Admin</h1>
+      <Header />
+      <Body />
+      <Footer />
     </>
   );
 };
