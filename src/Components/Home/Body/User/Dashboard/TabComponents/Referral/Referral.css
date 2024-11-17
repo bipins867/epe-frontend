@@ -1,0 +1,51 @@
+/* ReferralPage.css */
+
+.referral-page {
+    padding: 20px;
+  }
+  
+  .referral-link-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .referral-link-container input {
+    flex: 1;
+  }
+  
+  .share-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  
+  .share-btn {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .share-btn svg {
+    margin-right: 5px;
+  }
+  
+  .referral-history-table-container {
+    overflow-x: auto;
+  }
+  
+  @media (max-width: 767px) {
+    .share-buttons {
+      justify-content: center;
+    }
+  
+    .share-btn {
+      flex: 1 1 45%;
+      text-align: center;
+    }
+  
+    .referral-history-table-container {
+      max-width: 100%;
+      overflow-x: auto;
+    }
+  }
+  

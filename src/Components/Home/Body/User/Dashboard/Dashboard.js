@@ -18,9 +18,9 @@ import {
 import "./Dashboard.css";
 
 // Import Components
-import { PiggyBox } from "./TabComponents/PiggyBox/PiggyBox";
-import { Kit } from "./TabComponents/Kit/Kit";
-import { Referral } from "./TabComponents/Referral/Referral";
+import { PiggyBoxPage } from "./TabComponents/PiggyBox/PiggyBox";
+import { KitPage } from "./TabComponents/Kit/Kit";
+import { ReferralPage } from "./TabComponents/Referral/Referral";
 import { Loans } from "./TabComponents/Loans/Loans";
 import { Withdrawal } from "./TabComponents/Withdrawal/Withdrawal";
 import { TransferMoney } from "./TabComponents/TransferMoney/TransferMoney";
@@ -29,7 +29,7 @@ import { SavedAddress } from "./TabComponents/SavedAddress/SavedAddress";
 import { Kyc } from "./TabComponents/Kyc/Kyc";
 import { UserActivity } from "./TabComponents/UserActivity/UserActivity";
 import { SubhDhanLaabh } from "./TabComponents/ShubhDhanLaabh/ShubhDhanLaabh";
-import { Profile } from "./TabComponents/Profile/Profile";
+import { ProfilePage } from "./TabComponents/Profile/Profile";
 import { TabsView } from "./Tabs/Tabs";
 import { TabContentView } from "./TabContent/TabContent";
 
@@ -42,20 +42,20 @@ export const Dashboard = () => {
     {
       key: "profile",
       name: "UserProfile",
-      component: Profile,
+      component: ProfilePage,
       icon: <FaUser />,
     },
-    { key: "kit", name: "Kit", component: Kit, icon: <FaToolbox /> },
+    { key: "kit", name: "Kit", component: KitPage, icon: <FaToolbox /> },
     {
       key: "piggyBox",
       name: "PiggyBox",
-      component: PiggyBox,
+      component: PiggyBoxPage,
       icon: <FaPiggyBank />,
     },
     {
       key: "referral",
       name: "Referral",
-      component: Referral,
+      component: ReferralPage,
       icon: <FaGift />,
     },
     { key: "loans", name: "Loans", component: Loans, icon: <FaHandshake /> },
