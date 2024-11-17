@@ -1,0 +1,34 @@
+.withdrawal-page {
+    background-color: #f8f9fa;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .card {
+    border-radius: 15px;
+  }
+  
+  .piggybox-card,
+  .settlement-card {
+    margin-bottom: 20px;
+  }
+  
+  .detail-item {
+    margin-bottom: 10px;
+  }
+  
+  .history-table-container {
+    overflow-x: auto; /* Enables horizontal scrolling */
+  }
+  
+  .row > .col {
+    margin-bottom: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .piggybox-card,
+    .settlement-card {
+      margin-bottom: 20px;
+    }
+  }
+  

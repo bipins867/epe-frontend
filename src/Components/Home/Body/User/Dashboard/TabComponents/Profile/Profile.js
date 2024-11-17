@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col, Card, Button, Badge } from "react-bootstrap";
 import "./Profile.css";
+import { PageComponent } from "../../../../../../Utils/Utils";
 
 export const ProfilePage = () => {
   // Dummy user data
@@ -40,6 +41,7 @@ export const ProfilePage = () => {
 
   return (
     <Container className="user-profile-page py-4">
+      <PageComponent title={"User Profile"}/>
       {/* Profile Header */}
       <Row className="justify-content-center text-center">
         <Col md={4} sm={6} xs={8}>

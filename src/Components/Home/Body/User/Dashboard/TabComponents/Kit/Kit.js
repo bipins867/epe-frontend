@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import "./Kit.css";
+import { PageComponent } from "../../../../../../Utils/Utils";
 
 export const KitPage = () => {
   const dummyUser = {
@@ -52,6 +53,7 @@ export const KitPage = () => {
 
   return (
     <Container className="welcome-letter-page py-4">
+      <PageComponent title={"Kit"}/>
       <Row>
         <Col>
           <div ref={letterRef} className="print-container">

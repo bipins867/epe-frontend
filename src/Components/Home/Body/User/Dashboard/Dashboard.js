@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
-import {useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {
   FaUser,
   FaPiggyBank,
@@ -21,13 +21,13 @@ import "./Dashboard.css";
 import { PiggyBoxPage } from "./TabComponents/PiggyBox/PiggyBox";
 import { KitPage } from "./TabComponents/Kit/Kit";
 import { ReferralPage } from "./TabComponents/Referral/Referral";
-import { Loans } from "./TabComponents/Loans/Loans";
-import { Withdrawal } from "./TabComponents/Withdrawal/Withdrawal";
-import { TransferMoney } from "./TabComponents/TransferMoney/TransferMoney";
-import { Settlement } from "./TabComponents/Settlement/Settlement";
-import { SavedAddress } from "./TabComponents/SavedAddress/SavedAddress";
+import { LoansPage } from "./TabComponents/Loans/Loans";
+import { WithdrawalPage } from "./TabComponents/Withdrawal/Withdrawal";
+import { TransferMoneyPage } from "./TabComponents/TransferMoney/TransferMoney";
+import {  SettlementPage } from "./TabComponents/Settlement/Settlement";
+import { SavedAddressPage } from "./TabComponents/SavedAddress/SavedAddress";
 import { Kyc } from "./TabComponents/Kyc/Kyc";
-import { UserActivity } from "./TabComponents/UserActivity/UserActivity";
+import { UserActivityPage } from "./TabComponents/UserActivity/UserActivity";
 import { SubhDhanLaabh } from "./TabComponents/ShubhDhanLaabh/ShubhDhanLaabh";
 import { ProfilePage } from "./TabComponents/Profile/Profile";
 import { TabsView } from "./Tabs/Tabs";
@@ -58,36 +58,41 @@ export const Dashboard = () => {
       component: ReferralPage,
       icon: <FaGift />,
     },
-    { key: "loans", name: "Loans", component: Loans, icon: <FaHandshake /> },
+    {
+      key: "loans",
+      name: "Loans",
+      component: LoansPage,
+      icon: <FaHandshake />,
+    },
     {
       key: "withdrawal",
       name: "Withdrawal",
-      component: Withdrawal,
+      component: WithdrawalPage,
       icon: <FaMoneyBillWave />,
     },
     {
       key: "transferMoney",
       name: "Transfer Money",
-      component: TransferMoney,
+      component: TransferMoneyPage,
       icon: <FaExchangeAlt />,
     },
     {
       key: "settlement",
       name: "Settlement",
-      component: Settlement,
+      component: SettlementPage,
       icon: <FaFileInvoice />,
     },
     {
       key: "savedAddress",
       name: "SavedAddress",
-      component: SavedAddress,
+      component: SavedAddressPage,
       icon: <FaAddressBook />,
     },
     { key: "kyc", name: "KYC", component: Kyc, icon: <FaIdCard /> },
     {
       key: "userActivity",
       name: "UserActivity",
-      component: UserActivity,
+      component: UserActivityPage,
       icon: <FaChartLine />,
     },
     {

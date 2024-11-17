@@ -17,6 +17,7 @@ import {
 } from "react-icons/fa";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import "./Referral.css";
+import { PageComponent } from "../../../../../../Utils/Utils";
 
 export const ReferralPage = () => {
   const [referrals, setReferrals] = useState({
@@ -71,6 +72,7 @@ export const ReferralPage = () => {
 
   return (
     <Container className="referral-page">
+      <PageComponent title={"Referral"}/>
       <Row>
         <Col xs={12}>
           <Card>

@@ -1,0 +1,36 @@
+.settlement-page {
+    background-color: #f8f9fa;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .card {
+    border-radius: 15px;
+    padding: 20px;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  @media (max-width: 768px) {
+    .card {
+      padding: 15px;
+    }
+  
+    .card-title {
+      font-size: 1.25rem;
+    }
+  
+    button {
+      font-size: 0.9rem;
+    }
+  }
+  

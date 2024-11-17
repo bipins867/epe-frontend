@@ -9,6 +9,7 @@ import {
   Card,
 } from "react-bootstrap";
 import "./PiggyBox.css";
+import { PageComponent } from "../../../../../../Utils/Utils";
 
 export const PiggyBoxPage = () => {
   const user = {
@@ -62,6 +63,7 @@ export const PiggyBoxPage = () => {
 
   return (
     <Container className="piggybox-page py-4">
+      <PageComponent title={"Piggy Box"}/>
       <Row className="mb-4">
         <Col md={6} xs={12}>
           <Card className="mb-3">
