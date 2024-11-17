@@ -11,6 +11,7 @@ import {
   Table,
 } from "react-bootstrap";
 import "./UserActivity.css";
+import { PageComponent } from "../../../../../../Utils/Utils";
 
 export const UserActivityPage = () => {
   const [filterData, setFilterData] = useState({
@@ -63,6 +64,7 @@ export const UserActivityPage = () => {
 
   return (
     <Container className="user-activity-page">
+      <PageComponent title={"User Activity"}/>
       <Row className="mt-5">
         <Col xs={12}>
           <Card className="shadow">
