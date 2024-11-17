@@ -11,6 +11,7 @@ import { Kyc } from "./Kyc/Kyc";
 import { UserActivity } from "./UserActivity/UserActivity";
 import { SubhDhanLaabh } from "./ShubhDhanLaabh/ShubhDhanLaabh";
 import { Profile } from "./Profile/Profile";
+import { BasicLayoutPage } from "./BasicLayout/BasicLayout";
 export const Dashboard = () => {
   return (
     <>
@@ -29,6 +30,8 @@ export const Dashboard = () => {
         <Route path="shubhDhanLaabh" element={<SubhDhanLaabh />} />
         <Route path="*" element={<Navigate to="piggyBox" replace />} />
       </Routes>
+
+      <BasicLayoutPage />
     </>
   );
 };
