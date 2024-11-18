@@ -13,7 +13,7 @@ export const TabContentView = ({ isMobileView, tabs }) => {
               {tabs.map((tab) => (
                 <Route
                   key={tab.key}
-                  path={`${tab.key}`}
+                  path={`${tab.key}/*`}
                   element={<tab.component />}
                 />
               ))}
