@@ -26,9 +26,9 @@ import { WithdrawalPage } from "./TabComponents/Withdrawal/Withdrawal";
 import { TransferMoneyPage } from "./TabComponents/TransferMoney/TransferMoney";
 import {  SettlementPage } from "./TabComponents/Settlement/Settlement";
 import { SavedAddressPage } from "./TabComponents/SavedAddress/SavedAddress";
-import { Kyc } from "./TabComponents/Kyc/Kyc";
+import { KycPage } from "./TabComponents/Kyc/Kyc";
 import { UserActivityPage } from "./TabComponents/UserActivity/UserActivity";
-import { SubhDhanLaabh } from "./TabComponents/ShubhDhanLaabh/ShubhDhanLaabh";
+import { SubhDhanLaabhPage } from "./TabComponents/ShubhDhanLaabh/ShubhDhanLaabh";
 import { ProfilePage } from "./TabComponents/Profile/Profile";
 import { TabsView } from "./Tabs/Tabs";
 import { TabContentView } from "./TabContent/TabContent";
@@ -88,7 +88,7 @@ export const Dashboard = () => {
       component: SavedAddressPage,
       icon: <FaAddressBook />,
     },
-    { key: "kyc", name: "KYC", component: Kyc, icon: <FaIdCard /> },
+    { key: "kyc", name: "KYC", component: KycPage, icon: <FaIdCard /> },
     {
       key: "userActivity",
       name: "UserActivity",
@@ -98,7 +98,7 @@ export const Dashboard = () => {
     {
       key: "shubhDhanLaabh",
       name: "SubhDhanLaabh",
-      component: SubhDhanLaabh,
+      component: SubhDhanLaabhPage,
       icon: <FaCrown />,
     },
   ];
