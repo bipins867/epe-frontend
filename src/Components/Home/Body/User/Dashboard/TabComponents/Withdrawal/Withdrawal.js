@@ -50,26 +50,25 @@ export const WithdrawalPage = () => {
   return (
     <Container className="withdrawal-page">
       <PageComponent title={"Withdrawal"} />
+      
       {/* PiggyBox Details */}
       <Row className="mt-4">
         <Col xs={12}>
           <Card className="shadow piggybox-card">
             <Card.Body>
               <Card.Title className="text-primary">PiggyBox Details</Card.Title>
-              <Row>
-                <Col xs={6} sm={4}>
-                  <strong>Piggy Balance:</strong>
-                </Col>
-                <Col xs={6} sm={8}>
-                  ₹{piggyBoxDetails.balance}
-                </Col>
-                <Col xs={6} sm={4}>
-                  <strong>Uncleared Balance:</strong>
-                </Col>
-                <Col xs={6} sm={8}>
-                  ₹{piggyBoxDetails.unclearedBalance}
-                </Col>
-              </Row>
+              <Table bordered hover responsive className="mb-0">
+                <tbody>
+                  <tr>
+                    <td><strong>Piggy Balance</strong></td>
+                    <td>₹{piggyBoxDetails.balance}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Uncleared Balance</strong></td>
+                    <td>₹{piggyBoxDetails.unclearedBalance}</td>
+                  </tr>
+                </tbody>
+              </Table>
             </Card.Body>
           </Card>
         </Col>
@@ -80,35 +79,27 @@ export const WithdrawalPage = () => {
         <Col xs={12}>
           <Card className="shadow settlement-card">
             <Card.Body>
-              <Card.Title className="text-primary">
-                Settlement Details
-              </Card.Title>
-              <Row>
-                <Col xs={6} sm={4}>
-                  <strong>Account Holder Name:</strong>
-                </Col>
-                <Col xs={6} sm={8}>
-                  {settlementDetails.accountHolderName}
-                </Col>
-                <Col xs={6} sm={4}>
-                  <strong>Bank Name:</strong>
-                </Col>
-                <Col xs={6} sm={8}>
-                  {settlementDetails.bankName}
-                </Col>
-                <Col xs={6} sm={4}>
-                  <strong>Account Number:</strong>
-                </Col>
-                <Col xs={6} sm={8}>
-                  {settlementDetails.accountNumber}
-                </Col>
-                <Col xs={6} sm={4}>
-                  <strong>IFSC Code:</strong>
-                </Col>
-                <Col xs={6} sm={8}>
-                  {settlementDetails.ifscCode}
-                </Col>
-              </Row>
+              <Card.Title className="text-primary">Settlement Details</Card.Title>
+              <Table bordered hover responsive className="mb-0">
+                <tbody>
+                  <tr>
+                    <td><strong>Account Holder Name</strong></td>
+                    <td>{settlementDetails.accountHolderName}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Bank Name</strong></td>
+                    <td>{settlementDetails.bankName}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Account Number</strong></td>
+                    <td>{settlementDetails.accountNumber}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>IFSC Code</strong></td>
+                    <td>{settlementDetails.ifscCode}</td>
+                  </tr>
+                </tbody>
+              </Table>
             </Card.Body>
           </Card>
         </Col>
@@ -119,9 +110,7 @@ export const WithdrawalPage = () => {
         <Col xs={12}>
           <Card className="shadow withdrawal-card">
             <Card.Body>
-              <Card.Title className="text-primary">
-                Request Withdrawal
-              </Card.Title>
+              <Card.Title className="text-primary">Request Withdrawal</Card.Title>
               <Form>
                 <Form.Group className="mb-3" controlId="withdrawalAmount">
                   <Form.Label>Withdrawal Amount</Form.Label>
@@ -146,9 +135,7 @@ export const WithdrawalPage = () => {
         <Col xs={12}>
           <Card className="shadow history-card">
             <Card.Body>
-              <Card.Title className="text-primary">
-                Withdrawal History
-              </Card.Title>
+              <Card.Title className="text-primary">Withdrawal History</Card.Title>
               <div className="history-table-container">
                 <Table striped bordered hover responsive>
                   <thead>

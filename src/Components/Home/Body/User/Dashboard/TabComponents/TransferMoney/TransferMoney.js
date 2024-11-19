@@ -33,6 +33,7 @@ export const TransferMoneyPage = () => {
 
   const piggyBoxDetails = {
     balance: 10000,
+    unclearedBalance: 2340,
   };
 
   const handleVerifyRecipient = () => {
@@ -58,14 +59,22 @@ export const TransferMoneyPage = () => {
           <Card className="shadow piggybox-card">
             <Card.Body>
               <Card.Title className="text-primary">PiggyBox Details</Card.Title>
-              <Row>
-                <Col xs={6} sm={4}>
-                  <strong>Piggy Balance:</strong>
-                </Col>
-                <Col xs={6} sm={8}>
-                  ₹{piggyBoxDetails.balance}
-                </Col>
-              </Row>
+              <Table bordered hover responsive className="mb-0">
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong>Piggy Balance</strong>
+                    </td>
+                    <td>₹{piggyBoxDetails.balance}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Uncleared Balance</strong>
+                    </td>
+                    <td>₹{piggyBoxDetails.unclearedBalance}</td>
+                  </tr>
+                </tbody>
+              </Table>
             </Card.Body>
           </Card>
         </Col>

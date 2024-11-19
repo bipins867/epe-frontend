@@ -59,47 +59,44 @@ export const DashboardPage = () => {
 
   return (
     <Container className="piggybox-page py-4">
+      {/* User and PiggyBox Info */}
       <Row className="mb-4">
-        <Col md={6} xs={12}>
-          <Card className="mb-3">
-            <Card.Body>
-              <Card.Title className="text-primary">User Information</Card.Title>
-              <div className="user-info">
-                <p>
-                  <strong>Customer Name:</strong> {user.name}
-                </p>
-                <p>
-                  <strong>Customer ID:</strong> {user.customerId}
-                </p>
-                <p>
-                  <strong>KYC Status:</strong> {user.kycStatus}
-                </p>
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={6} xs={12}>
-          <Card>
-            <Card.Body>
-              <Card.Title className="text-primary">PiggyBox Details</Card.Title>
-              <p>
-                <strong>PiggyBox Balance:</strong> ₹
-                {user.piggyBalance.toFixed(2)}
-              </p>
-              <p>
-                <strong>Uncleared Balance:</strong> ₹
-                {user.unclearedBalance.toFixed(2)}
-              </p>
-              <div className="action-buttons mt-3">
-                <Link to="addFunds" className="btn btn-primary me-2">
-                  <i className="fas fa-plus-circle"></i> Add Reserve
-                </Link>
-              </div>
-            </Card.Body>
-          </Card>
+        <Col>
+          <Table bordered responsive className="text-center user-piggybox-table">
+            <thead>
+              <tr>
+                <th colSpan={2}>User Information</th>
+                <th colSpan={2}>PiggyBox Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Customer Name</strong></td>
+                <td>{user.name}</td>
+                <td><strong>PiggyBox Balance</strong></td>
+                <td>₹{user.piggyBalance.toFixed(2)}</td>
+              </tr>
+              <tr>
+                <td><strong>Customer ID</strong></td>
+                <td>{user.customerId}</td>
+                <td><strong>Uncleared Balance</strong></td>
+                <td>₹{user.unclearedBalance.toFixed(2)}</td>
+              </tr>
+              <tr>
+                <td><strong>KYC Status</strong></td>
+                <td>{user.kycStatus}</td>
+                <td colSpan={2}>
+                  <Link to="addFunds" className="btn btn-primary">
+                    <i className="fas fa-plus-circle"></i> Add Reserve
+                  </Link>
+                </td>
+              </tr>
+            </tbody>
+          </Table>
         </Col>
       </Row>
 
+      {/* Transaction Filters */}
       <Row className="mb-4">
         <Col>
           <Form className="d-flex gap-3 filter-form">
@@ -132,6 +129,7 @@ export const DashboardPage = () => {
         </Col>
       </Row>
 
+      {/* Transaction History */}
       <Row>
         <Col>
           <Card>

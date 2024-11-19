@@ -1,0 +1,54 @@
+/* Container for Close Account Page */
+.close-account-container {
+    background-color: #f8f9fa;
+    padding: 30px;
+    min-height: 100vh;
+  }
+  
+  /* Card Styling */
+  .close-account-card {
+    border-radius: 15px;
+    padding: 20px;
+  }
+  
+  /* Note Text Styling */
+  .note-text {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Terms Link Styling */
+  .terms-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .terms-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Button Styling */
+  .request-button {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 12px;
+  }
+  
+  /* Make Card Text More Readable */
+  .card-body p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+  
+  /* For Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .close-account-container {
+      padding: 15px;
+    }
+  
+    .request-button {
+      font-size: 1rem;
+    }
+  }
+  

@@ -1,0 +1,53 @@
+.ticket-info-page {
+    padding: 2rem 0;
+  }
+  
+  .card-info {
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .card-info h4 {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  
+  .card-price {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+  
+  .ticket-card {
+    border-radius: 10px;
+    background-color: #f8f9fa;
+  }
+  
+  .ticket-card p {
+    font-size: 1.1rem;
+    color: #495057;
+  }
+  
+  .ticket-card h4 {
+    color: #495057;
+    font-weight: 600;
+    margin-top: 1.5rem;
+  }
+  
+  .table th {
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .table td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  @media (max-width: 576px) {
+    .card-info h4 {
+      font-size: 1.5rem;
+    }
+  }
+  

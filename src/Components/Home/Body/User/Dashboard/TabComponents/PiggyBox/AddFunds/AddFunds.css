@@ -1,0 +1,23 @@
+.add-funds-page {
+    padding: 2rem 0;
+  }
+  
+  .add-funds-page .card {
+    border-radius: 10px;
+    background-color: #f8f9fa;
+  }
+  
+  .add-funds-page h3 {
+    color: #343a40;
+    font-weight: 600;
+  }
+  
+  .add-funds-page .form-control {
+    border-radius: 8px;
+  }
+  
+  .add-funds-page .btn {
+    border-radius: 8px;
+    font-weight: bold;
+  }
+  
