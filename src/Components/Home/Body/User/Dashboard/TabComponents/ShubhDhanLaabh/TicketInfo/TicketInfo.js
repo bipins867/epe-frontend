@@ -1,21 +1,24 @@
 import React from "react";
 import { Card, Table, Row, Col, Container, Button } from "react-bootstrap";
 import "./TicketInfo.css";
+import { useParams } from "react-router-dom";
 
 const ticketData = [
-  { title: "Stone", price: 100, baseColor: "#a8a8a8", gradientColor: "#d3d3d3" },
-  { title: "Iron", price: 500, baseColor: "#b87333", gradientColor: "#d4a17a" },
-  { title: "Bronze", price: 2000, baseColor: "#cd7f32", gradientColor: "#e2a679" },
-  { title: "Silver", price: 5000, baseColor: "#c0c0c0", gradientColor: "#e0e0e0" },
-  { title: "Gold", price: 15000, baseColor: "#ffd700", gradientColor: "#ffec94" },
-  { title: "Diamond", price: 25000, baseColor: "#b9f2ff", gradientColor: "#e0ffff" },
-  { title: "Platinum", price: 500000, baseColor: "#e5e4e2", gradientColor: "#f2f2f2" },
+  { title: "stone", price: 100, baseColor: "#a8a8a8", gradientColor: "#d3d3d3" }, // Gray
+  { title: "iron", price: 500, baseColor: "#b87333", gradientColor: "#d4a17a" }, // Copper
+  { title: "bronze", price: 2000, baseColor: "#cd7f32", gradientColor: "#e2a679" }, // Bronze
+  { title: "silver", price: 5000, baseColor: "#c0c0c0", gradientColor: "#e0e0e0" }, // Silver
+  { title: "gold", price: 15000, baseColor: "#ffd700", gradientColor: "#ffec94" }, // Gold
+  { title: "diamond", price: 25000, baseColor: "#b9f2ff", gradientColor: "#e0ffff" }, // Light Blue
+  { title: "platinum", price: 500000, baseColor: "#e5e4e2", gradientColor: "#f2f2f2" }, // Platinum
 ];
 
 export const TicketInfoPage = () => {
+  const {ticketName}=useParams();
+  const ticket = ticketData.find(item => item.title === ticketName);
   const ticketInfo = {
-    title: "Gold",
-    price: "₹15,000 (Inc. of GST)",
+    title: ticket.title,
+    price: `₹${ticket.price}(Inc. of GST)`,
     status: "Inactive",
     piggyBoxBalance: "₹10,000",
     affiliateBonus: "₹1,200",
@@ -44,7 +47,7 @@ export const TicketInfoPage = () => {
             }}
           >
             <Card.Body className="text-center">
-              <h4>{ticketInfo.title} Card</h4>
+              <h4>{ticketInfo.title.toUpperCase()} POOL</h4>
               <p className="card-price">{ticketInfo.price}</p>
             </Card.Body>
           </Card>
