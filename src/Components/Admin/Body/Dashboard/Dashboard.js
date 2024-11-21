@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import { Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Card, Dropdown, Container, Row, Col } from "react-bootstrap";
 import "./Dashboard.css";
 
 // Import your pages
-import { Home } from "./Home/Home";
-import { Announcement } from "./Announcement/Announcement";
+import { HomePage } from "./Home/Home";
+import {  AnnouncementPage } from "./Announcement/Announcement";
 import { Customers } from "./Customers/Customers";
 import { PiggyBox } from "./PiggyBox/PiggyBox";
 import { AccountClouser } from "./AccountClouser/AccountClouser";
@@ -41,6 +41,8 @@ export const Dashboard = () => {
     { name: "Edit Admins", path: "./editAdmin" },
   ];
 
+
+  
   return (
     <Container fluid className="dashboard-container">
       <Row>
@@ -91,8 +93,8 @@ export const Dashboard = () => {
         {/* Main Content */}
         <Col md={9} xs={12} className="main-content">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="announcement" element={<Announcement />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="announcement" element={<AnnouncementPage />} />
             <Route path="customers" element={<Customers />} />
             <Route path="piggyBox" element={<PiggyBox />} />
             <Route path="accountClouser" element={<AccountClouser />} />
