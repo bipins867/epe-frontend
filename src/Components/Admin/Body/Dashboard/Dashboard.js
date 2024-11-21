@@ -6,8 +6,8 @@ import "./Dashboard.css";
 // Import your pages
 import { HomePage } from "./Home/Home";
 import {  AnnouncementPage } from "./Announcement/Announcement";
-import { Customers } from "./Customers/Customers";
-import { PiggyBox } from "./PiggyBox/PiggyBox";
+import { CustomersPage } from "./Customers/Customers";
+import { PiggyBoxPage } from "./PiggyBox/PiggyBox";
 import { AccountClouser } from "./AccountClouser/AccountClouser";
 import { Withdrawal } from "./Withdrawal/Withdrawal";
 import { TransactionHistory } from "./TransactionHistory/TransactionHistory";
@@ -94,20 +94,20 @@ export const Dashboard = () => {
         <Col md={9} xs={12} className="main-content">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="announcement" element={<AnnouncementPage />} />
-            <Route path="customers" element={<Customers />} />
-            <Route path="piggyBox" element={<PiggyBox />} />
-            <Route path="accountClouser" element={<AccountClouser />} />
-            <Route path="withdrawal" element={<Withdrawal />} />
-            <Route path="transactionHistory" element={<TransactionHistory />} />
-            <Route path="referral" element={<Referral />} />
-            <Route path="kyc" element={<Kyc />} />
-            <Route path="customerSupport" element={<CustomerSupport />} />
-            <Route path="loan" element={<Loan />} />
-            <Route path="contactUs" element={<ContactUs />} />
-            <Route path="userActivity" element={<UserActivity />} />
-            <Route path="editAdmin" element={<EditAdmin />} />
-            <Route path="adminProfile" element={<AdminProfilePage />} />
+            <Route path="announcement/*" element={<AnnouncementPage />} />
+            <Route path="customers/*" element={<CustomersPage />} />
+            <Route path="piggyBox/*" element={<PiggyBoxPage />} />
+            <Route path="accountClouser/*" element={<AccountClouser />} />
+            <Route path="withdrawal/*" element={<Withdrawal />} />
+            <Route path="transactionHistory/*" element={<TransactionHistory />} />
+            <Route path="referral/*" element={<Referral />} />
+            <Route path="kyc/*" element={<Kyc />} />
+            <Route path="customerSupport/*" element={<CustomerSupport />} />
+            <Route path="loan/*" element={<Loan />} />
+            <Route path="contactUs/*" element={<ContactUs />} />
+            <Route path="userActivity/*" element={<UserActivity />} />
+            <Route path="editAdmin/*" element={<EditAdmin />} />
+            <Route path="adminProfile/*" element={<AdminProfilePage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Col>
