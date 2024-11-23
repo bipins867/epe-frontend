@@ -8,9 +8,9 @@ import { HomePage } from "./Home/Home";
 import {  AnnouncementPage } from "./Announcement/Announcement";
 import { CustomersPage } from "./Customers/Customers";
 import { PiggyBoxPage } from "./PiggyBox/PiggyBox";
-import { AccountClouser } from "./AccountClouser/AccountClouser";
-import { Withdrawal } from "./Withdrawal/Withdrawal";
-import { TransactionHistory } from "./TransactionHistory/TransactionHistory";
+import { AccountClouserPage } from "./AccountClouser/AccountClouser";
+import { WithdrawalPage } from "./Withdrawal/Withdrawal";
+import { TransactionHistoryPage } from "./TransactionHistory/TransactionHistory";
 import { Referral } from "./Referral/Referral";
 import { Kyc } from "./Kyc/Kyc";
 import { CustomerSupport } from "./CustomerSupport/CustomerSupport";
@@ -97,9 +97,9 @@ export const Dashboard = () => {
             <Route path="announcement/*" element={<AnnouncementPage />} />
             <Route path="customers/*" element={<CustomersPage />} />
             <Route path="piggyBox/*" element={<PiggyBoxPage />} />
-            <Route path="accountClouser/*" element={<AccountClouser />} />
-            <Route path="withdrawal/*" element={<Withdrawal />} />
-            <Route path="transactionHistory/*" element={<TransactionHistory />} />
+            <Route path="accountClouser/*" element={<AccountClouserPage />} />
+            <Route path="withdrawal/*" element={<WithdrawalPage />} />
+            <Route path="transactionHistory/*" element={<TransactionHistoryPage />} />
             <Route path="referral/*" element={<Referral />} />
             <Route path="kyc/*" element={<Kyc />} />
             <Route path="customerSupport/*" element={<CustomerSupport />} />
