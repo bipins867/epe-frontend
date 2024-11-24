@@ -1,17 +1,17 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Card, Dropdown, Container, Row, Col } from "react-bootstrap";
 import "./Dashboard.css";
 
 // Import your pages
 import { HomePage } from "./Home/Home";
-import {  AnnouncementPage } from "./Announcement/Announcement";
+import { AnnouncementPage } from "./Announcement/Announcement";
 import { CustomersPage } from "./Customers/Customers";
 import { PiggyBoxPage } from "./PiggyBox/PiggyBox";
 import { AccountClouserPage } from "./AccountClouser/AccountClouser";
 import { WithdrawalPage } from "./Withdrawal/Withdrawal";
 import { TransactionHistoryPage } from "./TransactionHistory/TransactionHistory";
-import { Referral } from "./Referral/Referral";
+import { ReferralPage } from "./Referral/Referral";
 import { Kyc } from "./Kyc/Kyc";
 import { CustomerSupport } from "./CustomerSupport/CustomerSupport";
 import { Loan } from "./Loan/Loan";
@@ -19,6 +19,7 @@ import { ContactUs } from "./ContactUs/ContactUs";
 import { UserActivity } from "./UserActivity/UserActivity";
 import { EditAdmin } from "./EditAdmin/EditAdmin";
 import { AdminProfilePage } from "./AdminProfile/AdminProfile";
+import { SubhDhanLaabhPage } from "./SubhDhanLaabh/SubhDhanLaabh";
 
 export const Dashboard = () => {
   const location = useLocation();
@@ -33,6 +34,7 @@ export const Dashboard = () => {
     { name: "Withdrawal", path: "./withdrawal" },
     { name: "Transaction History", path: "./transactionHistory" },
     { name: "Referral", path: "./referral" },
+    { name: "SubhDhanLaabh", path: "./subhDhanLaabh" },
     { name: "KYC", path: "./kyc" },
     { name: "Customer Support", path: "./customerSupport" },
     { name: "Loan", path: "./loan" },
@@ -41,8 +43,6 @@ export const Dashboard = () => {
     { name: "Edit Admins", path: "./editAdmin" },
   ];
 
-
-  
   return (
     <Container fluid className="dashboard-container">
       <Row>
@@ -99,9 +99,14 @@ export const Dashboard = () => {
             <Route path="piggyBox/*" element={<PiggyBoxPage />} />
             <Route path="accountClouser/*" element={<AccountClouserPage />} />
             <Route path="withdrawal/*" element={<WithdrawalPage />} />
-            <Route path="transactionHistory/*" element={<TransactionHistoryPage />} />
-            <Route path="referral/*" element={<Referral />} />
+            <Route
+              path="transactionHistory/*"
+              element={<TransactionHistoryPage />}
+            />
+            <Route path="referral/*" element={<ReferralPage />} />
+            <Route path="subhDhanLaabh/*" element={<SubhDhanLaabhPage />} />
             <Route path="kyc/*" element={<Kyc />} />
+
             <Route path="customerSupport/*" element={<CustomerSupport />} />
             <Route path="loan/*" element={<Loan />} />
             <Route path="contactUs/*" element={<ContactUs />} />
