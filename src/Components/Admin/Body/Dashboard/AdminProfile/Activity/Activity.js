@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Container, Row, Col, Form, Button, Table } from "react-bootstrap";
-import "./UserActivity.css";
+import "./Activity.css";
 
-export const UserActivityPage = () => {
+export const ActivityPage = () => {
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
   const [limit, setLimit] = useState(20);
@@ -78,6 +78,7 @@ export const UserActivityPage = () => {
             <th>Time</th>
             <th>Type</th>
             <th>Description</th>
+            <th>Affected User ID</th>
             <th>IP Address</th>
             <th>Location</th>
             <th>Device Type</th>
@@ -91,6 +92,7 @@ export const UserActivityPage = () => {
               <td>{activity.time}</td>
               <td>{activity.type}</td>
               <td>{activity.description}</td>
+              <td>{activity.affectedUserId}</td>
               <td>{activity.ipAddress}</td>
               <td>{activity.location}</td>
               <td>{activity.deviceType}</td>

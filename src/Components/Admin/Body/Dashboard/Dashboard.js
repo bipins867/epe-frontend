@@ -12,11 +12,11 @@ import { AccountClouserPage } from "./AccountClouser/AccountClouser";
 import { WithdrawalPage } from "./Withdrawal/Withdrawal";
 import { TransactionHistoryPage } from "./TransactionHistory/TransactionHistory";
 import { ReferralPage } from "./Referral/Referral";
-import { Kyc } from "./Kyc/Kyc";
+import { KycPage } from "./Kyc/Kyc";
 import { CustomerSupport } from "./CustomerSupport/CustomerSupport";
 import { Loan } from "./Loan/Loan";
 import { ContactUs } from "./ContactUs/ContactUs";
-import { UserActivity } from "./UserActivity/UserActivity";
+import { UserActivityPage } from "./UserActivity/UserActivity";
 import { EditAdmin } from "./EditAdmin/EditAdmin";
 import { AdminProfilePage } from "./AdminProfile/AdminProfile";
 import { SubhDhanLaabhPage } from "./SubhDhanLaabh/SubhDhanLaabh";
@@ -105,12 +105,12 @@ export const Dashboard = () => {
             />
             <Route path="referral/*" element={<ReferralPage />} />
             <Route path="subhDhanLaabh/*" element={<SubhDhanLaabhPage />} />
-            <Route path="kyc/*" element={<Kyc />} />
+            <Route path="kyc/*" element={<KycPage />} />
 
             <Route path="customerSupport/*" element={<CustomerSupport />} />
             <Route path="loan/*" element={<Loan />} />
             <Route path="contactUs/*" element={<ContactUs />} />
-            <Route path="userActivity/*" element={<UserActivity />} />
+            <Route path="userActivity/*" element={<UserActivityPage />} />
             <Route path="editAdmin/*" element={<EditAdmin />} />
             <Route path="adminProfile/*" element={<AdminProfilePage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
