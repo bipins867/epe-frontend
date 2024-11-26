@@ -1,0 +1,29 @@
+.edit-admin-page {
+    background-color: #f9f9f9;
+    padding: 20px;
+  }
+  
+  .edit-admin-page h4 {
+    font-weight: bold;
+  }
+  
+  .card-header {
+    background-color: #f1f1f1;
+    border-bottom: none;
+  }
+  
+  .table th,
+  .table td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .btn-primary {
+    font-size: 0.9rem;
+  }
+  
+  .admin-stat {
+    font-size: 1.1rem;
+    margin-bottom: 0;
+  }
+  

@@ -17,7 +17,7 @@ import { CustomerSupport } from "./CustomerSupport/CustomerSupport";
 import { Loan } from "./Loan/Loan";
 import { ContactUs } from "./ContactUs/ContactUs";
 import { UserActivityPage } from "./UserActivity/UserActivity";
-import { EditAdmin } from "./EditAdmin/EditAdmin";
+import { EditAdminPage } from "./EditAdmin/EditAdmin";
 import { AdminProfilePage } from "./AdminProfile/AdminProfile";
 import { SubhDhanLaabhPage } from "./SubhDhanLaabh/SubhDhanLaabh";
 
@@ -40,6 +40,7 @@ export const Dashboard = () => {
     { name: "Loan", path: "./loan" },
     { name: "Contact Us", path: "./contactUs" },
     { name: "User Activity", path: "./userActivity" },
+
     { name: "Edit Admins", path: "./editAdmin" },
   ];
 
@@ -111,7 +112,8 @@ export const Dashboard = () => {
             <Route path="loan/*" element={<Loan />} />
             <Route path="contactUs/*" element={<ContactUs />} />
             <Route path="userActivity/*" element={<UserActivityPage />} />
-            <Route path="editAdmin/*" element={<EditAdmin />} />
+
+            <Route path="editAdmin/*" element={<EditAdminPage />} />
             <Route path="adminProfile/*" element={<AdminProfilePage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

@@ -1,0 +1,59 @@
+/* Main Container */
+.admin-profile-container {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .page-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #343a40;
+  }
+  
+  /* Sub-tab Navigation */
+  .sub-tab-navigation {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .sub-tab-button {
+    flex: 1;
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #007bff;
+    background-color: transparent;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+  }
+  
+  .sub-tab-button.active {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .sub-tab-button:hover {
+    color: #0056b3;
+  }
+  
+  /* Sub-tab Content */
+  .sub-tab-content {
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    min-height: 200px;
+  }
+  
