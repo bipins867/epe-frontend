@@ -1,0 +1,30 @@
+.customer-view-page {
+  padding: 20px;
+}
+
+.customer-card,
+.admin-remark-card {
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.customer-card-header,
+.admin-remark-header {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+}
+
+.customer-view-table th,
+.customer-view-table td {
+  vertical-align: middle;
+}
+
+form .form-control {
+  font-size: 0.9rem;
+}
+
+form .btn {
+  font-size: 0.9rem;
+}

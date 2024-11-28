@@ -1,0 +1,32 @@
+.cards-page {
+    padding: 20px;
+  }
+  
+  .material-card {
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    text-transform: capitalize;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .material-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .material-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .material-price {
+    font-size: 1rem;
+  }
+  
+  .card-link {
+    text-decoration: none;
+  }
+  

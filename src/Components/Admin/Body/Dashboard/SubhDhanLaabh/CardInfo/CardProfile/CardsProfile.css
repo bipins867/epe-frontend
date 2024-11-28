@@ -1,0 +1,39 @@
+.cards-profile-page {
+    padding: 20px;
+  }
+  
+  .profile-card {
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  .profile-card-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+  }
+  
+  .profile-card-price {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  
+  .info-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .info-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .info-value {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+  }
+  

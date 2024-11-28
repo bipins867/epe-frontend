@@ -13,9 +13,9 @@ import { WithdrawalPage } from "./Withdrawal/Withdrawal";
 import { TransactionHistoryPage } from "./TransactionHistory/TransactionHistory";
 import { ReferralPage } from "./Referral/Referral";
 import { KycPage } from "./Kyc/Kyc";
-import { CustomerSupport } from "./CustomerSupport/CustomerSupport";
-import { Loan } from "./Loan/Loan";
-import { ContactUs } from "./ContactUs/ContactUs";
+import { CustomerSupportPage } from "./CustomerSupport/CustomerSupport";
+import { LoanPage } from "./Loan/Loan";
+import { ContactUsPage } from "./ContactUs/ContactUs";
 import { UserActivityPage } from "./UserActivity/UserActivity";
 import { EditAdminPage } from "./EditAdmin/EditAdmin";
 import { AdminProfilePage } from "./AdminProfile/AdminProfile";
@@ -108,9 +108,9 @@ export const Dashboard = () => {
             <Route path="subhDhanLaabh/*" element={<SubhDhanLaabhPage />} />
             <Route path="kyc/*" element={<KycPage />} />
 
-            <Route path="customerSupport/*" element={<CustomerSupport />} />
-            <Route path="loan/*" element={<Loan />} />
-            <Route path="contactUs/*" element={<ContactUs />} />
+            <Route path="customerSupport/*" element={<CustomerSupportPage />} />
+            <Route path="loan/*" element={<LoanPage />} />
+            <Route path="contactUs/*" element={<ContactUsPage />} />
             <Route path="userActivity/*" element={<UserActivityPage />} />
 
             <Route path="editAdmin/*" element={<EditAdminPage />} />
