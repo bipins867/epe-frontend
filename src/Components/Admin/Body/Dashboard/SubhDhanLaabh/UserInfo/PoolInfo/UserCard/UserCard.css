@@ -1,0 +1,63 @@
+.user-card-page {
+    padding: 20px;
+  }
+  
+  .user-card-tabs .nav-link {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #555;
+  }
+  
+  .user-card-tabs .nav-link.active {
+    color: #007bff;
+    border-color: #007bff #007bff #fff;
+  }
+  
+  .material-card {
+    border-radius: 10px;
+    color: #fff;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .material-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .material-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .material-price {
+    font-size: 1.2rem;
+  }
+  
+  .info-table th,
+  .info-table td {
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .referral-history-card {
+    border-radius: 10px;
+  }
+  
+  .referral-table th {
+    background-color: #f8f9fa;
+    color: #555;
+  }
+  
+  .purchase-history-table {
+    font-size: 0.9rem;
+    color: #333;
+  }
+  
+  .purchase-history-table thead th {
+    background-color: #f8f9fa;
+  }
+  
+  .purchase-history-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
