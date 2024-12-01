@@ -19,10 +19,13 @@ export const AlertPortal = (props) => {
   );
 };
 
-export const InfoAlert = ({ title,description }) => {
+export const InfoAlert = ({ title,description ,hideAlert}) => {
   const [isVisible, setIsVisible] = useState(true);
 
-  const handleClose = () => setIsVisible(false);
+  const handleClose = () => {
+    setIsVisible(false)
+    hideAlert();
+  }
 
   return (
     <>
@@ -41,10 +44,13 @@ export const InfoAlert = ({ title,description }) => {
   );
 };
 
-export const ErrorAlert = ({ title,description }) => {
+export const ErrorAlert = ({ title,description ,hideAlert}) => {
   const [isVisible, setIsVisible] = useState(true);
 
-  const handleClose = () => setIsVisible(false);
+  const handleClose = () => {
+    setIsVisible(false)
+    hideAlert();
+  }
 
   return (
     <>
@@ -63,10 +69,13 @@ export const ErrorAlert = ({ title,description }) => {
   );
 };
 
-export const InputAlert = ({ title,handleSubmit }) => {
+export const InputAlert = ({ title,handleSubmit ,hideAlert}) => {
   const [isVisible, setIsVisible] = useState(true);
 
-  const handleClose = () => setIsVisible(false);
+  const handleClose = () => {
+    setIsVisible(false)
+    hideAlert();
+  }
 
   
   return (

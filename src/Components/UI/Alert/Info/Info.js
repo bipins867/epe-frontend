@@ -2,7 +2,7 @@ import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import "./Info.css"; // Import your custom styles
 
-export const InfoAlert = ({ show, handleClose, title, description }) => {
+export const InfoAlertModal = ({ show, handleClose, title, description }) => {
   return (
     <Modal
       show={show}

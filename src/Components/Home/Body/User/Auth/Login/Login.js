@@ -1,19 +1,27 @@
 import React, { useState } from "react";
 import { Form, Button, Spinner } from "react-bootstrap";
 import "./Login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthLayout } from "../Utils/AuthLayout/AuthLayout";
 import { loginHandler } from "./apiHandler";
+import { useAlert } from "../../../../../UI/Alert/AlertContext";
 
 
 export const LoginPage = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const {showAlert}=useAlert();
+  const navigate=useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault(); // Prevent form submission from reloading the page
-    await loginHandler(phone, password, setIsLoading);
+    const response=await loginHandler(phone, password, setIsLoading,showAlert);
+
+    if(response){
+      const {otpToken,url,otpType}=response;
+      navigate('/user/auth/otp',{state:{otpToken,url,otpType}})
+    }
   };
 
   return (
