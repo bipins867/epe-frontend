@@ -1,29 +1,52 @@
-import React from "react";
-import { Form, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Form, Button, Spinner } from "react-bootstrap";
 import "./Login.css";
 import { Link } from "react-router-dom";
 import { AuthLayout } from "../Utils/AuthLayout/AuthLayout";
+import { loginHandler } from "./apiHandler";
+
 
 export const LoginPage = () => {
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Prevent form submission from reloading the page
+    await loginHandler(phone, password, setIsLoading);
+  };
+
   return (
     <AuthLayout title={title} description={description} imageUrl={imageUrl}>
       <h2 className="text-center mb-4">Login</h2>
-      <Form>
+      <Form onSubmit={handleLogin}>
         {/* Phone Input */}
         <Form.Group controlId="formPhone" className="mb-3">
           <Form.Label>Phone</Form.Label>
-          <Form.Control type="text" placeholder="Enter your phone number" />
+          <Form.Control
+            type="phone"
+            placeholder="Enter your phone number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+          />
         </Form.Group>
         {/* Password Input */}
         <Form.Group controlId="formPassword" className="mb-3">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Enter your password" />
+          <Form.Control
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
         </Form.Group>
         {/* Login Button */}
-        <Button variant="primary" type="submit" className="w-100">
-          Login
+        <Button variant="primary" type="submit" className="w-100" disabled={isLoading}>
+          {isLoading ? <Spinner as="span" animation="border" size="sm" role="status" /> : "Login"}
         </Button>
-        {/* SignUp Link */}
+        {/* SignUp and Other Links */}
         <div className="text-center mt-3">
           <p>
             Don’t have an account?{" "}
@@ -57,8 +80,5 @@ export const LoginPage = () => {
 };
 
 const title = "Welcome Back to EPE India";
-const description = `Log in to access instant loans, referral rewards, and investment
-                opportunities with PiggyBox. Empower your financial future
-                today!`;
-const imageUrl =
-  "https://img.freepik.com/free-vector/login-concept-illustration_114360-739.jpg";
+const description = `Log in to access instant loans, referral rewards, and investment opportunities with PiggyBox. Empower your financial future today!`;
+const imageUrl = "https://img.freepik.com/free-vector/login-concept-illustration_114360-739.jpg";
