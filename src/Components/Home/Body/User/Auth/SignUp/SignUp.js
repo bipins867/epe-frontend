@@ -72,6 +72,10 @@ export const SignUpPage = () => {
       return showAlert("error", "Error!", "Password Mismatch!");
     }
 
+    if(formData.email===''){
+      delete formData.email;
+    }
+
     const response = await signUpHandler(
       { ...formData, byReferallId: referralId },
       setIsSubmitting,
@@ -164,7 +168,7 @@ export const SignUpPage = () => {
             placeholder="Enter your email"
             value={formData.email}
             onChange={handleInputChange}
-            required
+            
           />
         </Form.Group>
         {/* Password */}

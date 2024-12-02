@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Spinner } from "react-bootstrap";
 import "./ResetPassword.css";
 import { Link } from "react-router-dom";
 import { AuthLayout } from "../Utils/AuthLayout/AuthLayout";
@@ -11,6 +11,7 @@ export const ResetPasswordPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Loading state
 
   // Handle input changes
   const handleCustomerIdChange = (e) => setCustomerId(e.target.value);
@@ -30,9 +31,13 @@ export const ResetPasswordPage = () => {
     }
 
     setError("");
-    // Simulate password reset logic
-    // Replace this with actual API call to reset the password
-    setSuccessMessage("Password reset successfully! You can now login.");
+    setIsLoading(true); // Show spinner
+
+    // Simulate password reset logic (Replace this with actual API call)
+    setTimeout(() => {
+      setSuccessMessage("Password reset successfully! You can now login.");
+      setIsLoading(false); // Hide spinner
+    }, 2000);
   };
 
   return (
@@ -94,8 +99,15 @@ export const ResetPasswordPage = () => {
           variant="primary"
           onClick={handleResetPassword}
           className="w-100 mb-3"
+          disabled={isLoading} // Disable button during loading
         >
-          Reset Password
+          {isLoading ? (
+            <>
+              <Spinner animation="border" size="sm" /> Resetting...
+            </>
+          ) : (
+            "Reset Password"
+          )}
         </Button>
       </Form>
 

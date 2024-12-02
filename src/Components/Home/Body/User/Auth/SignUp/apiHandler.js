@@ -28,9 +28,8 @@ export const verifyReferralHandler = async (
 
   try {
     const result = await apiRequest(url, obj, "", "post");
-    const data = result.data;
-
-    return data;
+    
+    return result;
   } catch (e) {
     handleErrors(e, showAlert);
   } finally {

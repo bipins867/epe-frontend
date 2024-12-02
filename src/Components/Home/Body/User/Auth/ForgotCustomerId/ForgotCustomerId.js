@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Spinner } from "react-bootstrap";
 import "./ForgotCustomerId.css";
 import { Link } from "react-router-dom";
 import { AuthLayout } from "../Utils/AuthLayout/AuthLayout";
@@ -8,6 +8,7 @@ export const ForgotCustomerIdPage = () => {
   const [phone, setPhone] = useState("");
   const [customerId, setCustomerId] = useState(null);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Loading state
 
   // Handle phone input change
   const handlePhoneChange = (e) => {
@@ -23,9 +24,13 @@ export const ForgotCustomerIdPage = () => {
     }
 
     setError("");
-    // Simulate fetching customer ID (You would replace this with an actual API call)
-    // For now, we just simulate success with a static customer ID
-    setCustomerId("CUST123456");
+    setIsLoading(true); // Show spinner
+
+    // Simulate API call with 2 seconds delay
+    setTimeout(() => {
+      setCustomerId("CUST123456"); // Simulated customer ID
+      setIsLoading(false); // Hide spinner
+    }, 2000);
   };
 
   return (
@@ -53,8 +58,15 @@ export const ForgotCustomerIdPage = () => {
           variant="primary"
           onClick={handleGetCustomerId}
           className="w-100 mb-3"
+          disabled={isLoading} // Disable button during loading
         >
-          Get Customer ID
+          {isLoading ? (
+            <>
+              <Spinner animation="border" size="sm" /> Retrieving...
+            </>
+          ) : (
+            "Get Customer ID"
+          )}
         </Button>
 
         {/* Display Customer ID if available */}

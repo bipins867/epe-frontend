@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {  Form, Button } from "react-bootstrap";
+import { Form, Button, Spinner } from "react-bootstrap";
 import "./ActivateAccount.css";
 import { Link } from "react-router-dom";
 import { AuthLayout } from "../Utils/AuthLayout/AuthLayout";
@@ -8,6 +8,7 @@ export const ActivateAccountPage = () => {
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Loading state
 
   // Handle input changes
   const handlePhoneChange = (e) => setPhone(e.target.value);
@@ -25,9 +26,13 @@ export const ActivateAccountPage = () => {
     }
 
     setError("");
-    // Simulate account activation logic
-    // Replace this with actual API call to activate the account
-    setSuccessMessage("Account activated successfully! You can now log in.");
+    setIsLoading(true); // Show spinner
+
+    // Simulate account activation logic (Replace this with actual API call)
+    setTimeout(() => {
+      setSuccessMessage("Account activated successfully! You can now log in.");
+      setIsLoading(false); // Hide spinner
+    }, 2000);
   };
 
   return (
@@ -57,8 +62,15 @@ export const ActivateAccountPage = () => {
           variant="primary"
           onClick={handleActivateAccount}
           className="w-100 mb-3"
+          disabled={isLoading} // Disable button during loading
         >
-          Activate Account
+          {isLoading ? (
+            <>
+              <Spinner animation="border" size="sm" /> Activating...
+            </>
+          ) : (
+            "Activate Account"
+          )}
         </Button>
       </Form>
 
@@ -76,4 +88,5 @@ export const ActivateAccountPage = () => {
 
 const title = "Activate Your Account";
 const description = `Please enter your phone number to activate your account.`;
-const imageUrl = "https://img.freepik.com/free-vector/phone-user-activating-account-with-fingerprint-smartphone-screen-biometric-identity_74855-15499.jpg";
+const imageUrl =
+  "https://img.freepik.com/free-vector/phone-user-activating-account-with-fingerprint-smartphone-screen-biometric-identity_74855-15499.jpg";

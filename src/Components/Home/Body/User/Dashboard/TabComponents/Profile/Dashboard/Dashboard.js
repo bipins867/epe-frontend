@@ -1,9 +1,13 @@
 import React from "react";
 import { Container, Row, Col, Card, Button, Badge } from "react-bootstrap";
 import "./Dashboard.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUserAuthToken, userLogOut } from "../../../../../../../../Store/User/auth";
 
 export const DashboardPage = () => {
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
   // Dummy user data
   const dummyUser = {
     name: "John Doe",
@@ -34,6 +38,16 @@ export const DashboardPage = () => {
     piggyBoxBalance,
     profileImage,
   } = dummyUser;
+
+
+  const logoutHandler=(e)=>{
+    e.preventDefault();
+    localStorage.removeItem('userToken');
+    dispatch(userLogOut());
+    dispatch(setUserAuthToken(''));
+    navigate('/user/auth/login');
+    
+  }
 
   return (
     <Container className="user-profile-page py-4">
@@ -127,7 +141,7 @@ export const DashboardPage = () => {
       {/* Logout Button */}
       <Row className="mt-4 text-center">
         <Col className="button-container">
-          <Button variant="danger" size="lg" className="logout-button">
+          <Button variant="danger" size="lg" className="logout-button" onClick={logoutHandler}>
             Logout
           </Button>
           <Link
