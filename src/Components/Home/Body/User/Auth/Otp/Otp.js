@@ -86,6 +86,14 @@ export const OtpPage = () => {
           navigate("/user/auth/login");
         });
       }
+      else if(otpType==='forgetCandidateId'){
+        showAlert('info','Info!', `CustomerId :- ${response.data.candidateId}`,null)
+        navigate("/user/auth/login");
+      }
+      else if(otpType==='resetPassword'){
+        showAlert('info','Info!', `Password Reset Successfully!`,null)
+        navigate("/user/auth/login");
+      }
     }
   };
 

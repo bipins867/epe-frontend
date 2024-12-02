@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { Form, Button, Spinner } from "react-bootstrap";
 import "./ForgotCustomerId.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthLayout } from "../Utils/AuthLayout/AuthLayout";
+import { getCustomerIdHandler } from "./apiHandler";
+import { useAlert } from "../../../../../UI/Alert/AlertContext";
 
 export const ForgotCustomerIdPage = () => {
   const [phone, setPhone] = useState("");
-  const [customerId, setCustomerId] = useState(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false); // Loading state
+  const { showAlert } = useAlert();
+  const navigate = useNavigate();
 
   // Handle phone input change
   const handlePhoneChange = (e) => {
@@ -16,7 +19,7 @@ export const ForgotCustomerIdPage = () => {
   };
 
   // Handle Get Customer ID click
-  const handleGetCustomerId = () => {
+  const handleGetCustomerId = async () => {
     // Basic validation
     if (!phone || phone.length !== 10) {
       setError("Please enter a valid 10-digit phone number.");
@@ -24,13 +27,13 @@ export const ForgotCustomerIdPage = () => {
     }
 
     setError("");
-    setIsLoading(true); // Show spinner
 
-    // Simulate API call with 2 seconds delay
-    setTimeout(() => {
-      setCustomerId("CUST123456"); // Simulated customer ID
-      setIsLoading(false); // Hide spinner
-    }, 2000);
+    const response = await getCustomerIdHandler(phone, setIsLoading, showAlert);
+
+    if (response) {
+      const { otpToken, url, otpType } = response;
+      navigate("/user/auth/otp", { state: { otpToken, url, otpType } });
+    }
   };
 
   return (
@@ -68,13 +71,6 @@ export const ForgotCustomerIdPage = () => {
             "Get Customer ID"
           )}
         </Button>
-
-        {/* Display Customer ID if available */}
-        {customerId && (
-          <div className="text-center mb-3">
-            <h5>Your Customer ID: {customerId}</h5>
-          </div>
-        )}
       </Form>
 
       {/* Login Button */}

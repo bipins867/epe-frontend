@@ -1,20 +1,24 @@
 import React, { useState } from "react";
 import { Form, Button, Spinner } from "react-bootstrap";
 import "./ActivateAccount.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthLayout } from "../Utils/AuthLayout/AuthLayout";
+import { activateAccountHandler } from "./apiHandler";
+import { useAlert } from "../../../../../UI/Alert/AlertContext";
 
 export const ActivateAccountPage = () => {
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false); // Loading state
+  const { showAlert } = useAlert();
+  const navigate = useNavigate();
 
   // Handle input changes
   const handlePhoneChange = (e) => setPhone(e.target.value);
 
   // Handle Account Activation
-  const handleActivateAccount = () => {
+  const handleActivateAccount = async () => {
     if (!phone) {
       setError("Please enter a phone number");
       return;
@@ -26,13 +30,18 @@ export const ActivateAccountPage = () => {
     }
 
     setError("");
-    setIsLoading(true); // Show spinner
 
-    // Simulate account activation logic (Replace this with actual API call)
-    setTimeout(() => {
-      setSuccessMessage("Account activated successfully! You can now log in.");
-      setIsLoading(false); // Hide spinner
-    }, 2000);
+    const response = await activateAccountHandler(
+      phone,
+      setIsLoading,
+      showAlert
+    );
+
+    if (response) {
+      const { otpToken, url, otpType } = response;
+      navigate("/user/auth/otp", { state: { otpToken, url, otpType } });
+      setSuccessMessage("Please proceed for OTP Section!");
+    }
   };
 
   return (

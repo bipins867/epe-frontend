@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Form, Button, Spinner } from "react-bootstrap";
 import "./ResetPassword.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthLayout } from "../Utils/AuthLayout/AuthLayout";
+import { useAlert } from "../../../../../UI/Alert/AlertContext";
+import { resetPasswordHandler } from "./apiHandler";
 
 export const ResetPasswordPage = () => {
   const [customerId, setCustomerId] = useState("");
@@ -12,6 +14,8 @@ export const ResetPasswordPage = () => {
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false); // Loading state
+  const { showAlert } = useAlert();
+  const navigate = useNavigate();
 
   // Handle input changes
   const handleCustomerIdChange = (e) => setCustomerId(e.target.value);
@@ -20,7 +24,7 @@ export const ResetPasswordPage = () => {
   const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value);
 
   // Handle Reset Password
-  const handleResetPassword = () => {
+  const handleResetPassword = async () => {
     if (!customerId || !phone || !newPassword || !confirmPassword) {
       setError("Please fill all fields");
       return;
@@ -31,13 +35,20 @@ export const ResetPasswordPage = () => {
     }
 
     setError("");
-    setIsLoading(true); // Show spinner
 
-    // Simulate password reset logic (Replace this with actual API call)
-    setTimeout(() => {
-      setSuccessMessage("Password reset successfully! You can now login.");
-      setIsLoading(false); // Hide spinner
-    }, 2000);
+    const response = await resetPasswordHandler(
+      customerId,
+      phone,
+      newPassword,
+      setIsLoading,
+      showAlert
+    );
+
+    if (response) {
+      const { otpToken, url, otpType } = response;
+      navigate("/user/auth/otp", { state: { otpToken, url, otpType } });
+      setSuccessMessage("Please proceed for next section!");
+    }
   };
 
   return (
