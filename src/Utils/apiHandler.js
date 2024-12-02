@@ -42,7 +42,7 @@ export const handleErrors = async (err, showAlert) => {
     if (response.data && response.data.errors) {
       alertMessage = "Please fix the following errors:\n";
       Object.keys(response.data.errors).forEach((er) => {
-        alertMessage += response.data.errors[er] + "\n";
+        alertMessage += response.data.errors[er] + " || ";
       });
     } else if (response.data && response.data.message) {
       alertMessage = response.data.message; // Message from server

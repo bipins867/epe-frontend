@@ -11,19 +11,31 @@ export const AlertProvider = ({ children }) => {
     title: "",
     description: "",
     handleSubmit: null,
+    handlePostAlert: null,
   });
 
-  const showAlert = (type, title, description = "", handleSubmit = null) => {
-    setAlertState({ type, title, description, handleSubmit });
+  const showAlert = (
+    type,
+    title,
+    description = "",
+    handleSubmit = null,
+    handlePostAlert = null
+  ) => {
+    setAlertState({ type, title, description, handleSubmit, handlePostAlert });
   };
 
-  const hideAlert = () =>
+  const hideAlert = () => {
+    if (alertState.handlePostAlert) {
+      alertState.handlePostAlert();
+    }
     setAlertState({
       type: null,
       title: "",
       description: "",
       handleSubmit: null,
+      handlePostAlert: null,
     });
+  };
 
   return (
     <AlertContext.Provider value={{ showAlert, hideAlert }}>

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Spinner } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom"; // Import useLocation
+import { Link, useLocation, useNavigate } from "react-router-dom"; // Import useLocation
 import "./Otp.css";
 import { AuthLayout } from "../Utils/AuthLayout/AuthLayout";
 import { otpAuthHandler, resentOtpHandler } from "./apiHandler";
 import { useAlert } from "../../../../../UI/Alert/AlertContext";
+import { useDispatch } from "react-redux";
+import { setUserAuthToken, userLogin } from "../../../../../../Store/User/auth";
 
 export const OtpPage = () => {
   // Use useLocation hook to access the passed state
@@ -16,6 +18,15 @@ export const OtpPage = () => {
   const [isResendEnabled, setIsResendEnabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // State to handle loading status
   const { showAlert } = useAlert();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // Redirect to login if required parameters are missing
+  useEffect(() => {
+    if (!otpToken || !url || !otpType) {
+      navigate("/user/auth/login");
+    }
+  }, [otpToken, url, otpType, navigate]);
 
   // Handle OTP input change
   const handleOtpChange = (e) => {
@@ -36,11 +47,8 @@ export const OtpPage = () => {
     return () => clearInterval(interval);
   }, [timer]);
 
-
-  
   // Resend OTP handler
   const handleResendOtp = async () => {
-    
     const isOtpResent = () => {
       setIsResendEnabled(false);
       setTimer(30); // Reset timer to 30 seconds
@@ -54,7 +62,31 @@ export const OtpPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await otpAuthHandler(otp, otpToken, otpType, url, setIsLoading, showAlert);
+    const response = await otpAuthHandler(
+      otp,
+      otpToken,
+      otpType,
+      url,
+      setIsLoading,
+      showAlert
+    );
+
+    if (response && response.data) {
+      if (otpType === "login") {
+        const { token } = response.data;
+        localStorage.setItem("userToken", token);
+        // Update Redux state
+        dispatch(userLogin()); // Set isLoggedIn to true
+        dispatch(setUserAuthToken(token)); // Update token
+
+        // Navigate to another page after successful login
+        navigate("/user/piggyBox");
+      } else if (otpType === "signUp") {
+        showAlert("info", "Info!", "SignUp Successfull", null, () => {
+          navigate("/user/auth/login");
+        });
+      }
+    }
   };
 
   return (
