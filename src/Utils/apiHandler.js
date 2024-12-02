@@ -61,18 +61,21 @@ export const handleErrors = async (err, showAlert) => {
   }
 
   // Show alert if alertMsg argument is true and alertMessage exists
- 
+
   if (alertMessage) {
-    showAlert("error", "Error!", alertMessage);
+    showAlert("error", "Error!", alertMessage, null, () => {
+      window.location = "/user/auth/login";
+    });
   }
 
   if (response && response.status === 503) {
     const state = Store.getState();
     const userType = state.commonInfo.userType;
-
+    localStorage.removeItem("userToken");
     if (userType === "user") {
       Store.dispatch(userLogOut());
       Store.dispatch(setUserAuthToken(null));
+      //window.location='/user/auth/login'
     } else if (userType === "admin") {
       //Admin Dispact options will be here
     } else {

@@ -36,7 +36,8 @@ import { TabContentView } from "./TabContent/TabContent";
 export const Dashboard = () => {
   const location = useLocation();
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
-
+  
+  
   // List of tabs with their routes, names, and icons
   const tabs = [
     {
