@@ -1,18 +1,35 @@
 import React, { useState } from "react";
-import { Card, Form, Button, Container, Row, Col } from "react-bootstrap";
+import {
+  Card,
+  Form,
+  Button,
+  Container,
+  Row,
+  Col,
+  Spinner,
+} from "react-bootstrap";
 import "./AddFunds.css";
+import { useAlert } from "../../../../../../../UI/Alert/AlertContext";
+import { addFundsHandler } from "./apiHandler";
 
 export const AddFundsPage = () => {
   const [amount, setAmount] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // State to control loading spinner
+  const { showAlert } = useAlert();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!amount || parseFloat(amount) <= 0) {
       alert("Please enter a valid amount.");
       return;
     }
-    // Add funds logic here
-    console.log("Funds added:", amount);
+
+    const response = await addFundsHandler(amount, setIsLoading, showAlert);
+
+    if (response) {
+      const redirectUrl = response.redirectInfo.url;
+      window.location.replace(redirectUrl);
+    }
   };
 
   return (
@@ -32,8 +49,17 @@ export const AddFundsPage = () => {
                     onChange={(e) => setAmount(e.target.value)}
                   />
                 </Form.Group>
-                <Button type="submit" variant="primary" className="w-100">
-                  Add
+                <Button
+                  type="submit"
+                  variant="primary"
+                  className="w-100"
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <Spinner animation="border" size="sm" /> // Spinner for loading state
+                  ) : (
+                    "Add"
+                  )}
                 </Button>
               </Form>
             </Card.Body>
@@ -43,4 +69,3 @@ export const AddFundsPage = () => {
     </Container>
   );
 };
-
