@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Row,
@@ -9,41 +9,25 @@ import {
   Dropdown,
   DropdownButton,
   Table,
+  Spinner,
 } from "react-bootstrap";
 import "./UserActivity.css";
 import { PageComponent } from "../../../../../../Utils/Utils";
+import { getUserActivityHandler } from "./apiHandler";
+import { useAlert } from "../../../../../../UI/Alert/AlertContext";
 
 export const UserActivityPage = () => {
   const [filterData, setFilterData] = useState({
-    from: "",
-    to: "",
+    fromDate: "",
+    toDate: "",
     limit: 20,
-    type: "All",
+    activityType: "All",
   });
 
-  const activityData = [
-    {
-      id: 1,
-      date: "2024-10-01",
-      time: "10:30 AM",
-      type: "AdminUpdate",
-      description: "Updated user profile",
-      ipAddress: "192.168.1.1",
-      location: "New York, USA",
-      deviceType: "Mobile",
-    },
-    {
-      id: 2,
-      date: "2024-10-02",
-      time: "12:00 PM",
-      type: "Custom",
-      description: "Custom activity",
-      ipAddress: "192.168.1.2",
-      location: "California, USA",
-      deviceType: "Desktop",
-    },
-  ];
-
+  const [activityData, setActivityData] = useState([ ]);
+  const [isFetching, setIsFetching] = useState(false); // State for activity fetching
+ const {showAlert}=useAlert();
+  
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilterData({ ...filterData, [name]: value });
@@ -53,18 +37,28 @@ export const UserActivityPage = () => {
     setFilterData({ ...filterData, limit });
   };
 
-  const handleTypeChange = (type) => {
-    setFilterData({ ...filterData, type });
+  const handleTypeChange = (activityType) => {
+    setFilterData({ ...filterData, activityType });
   };
 
-  const getActivity = () => {
-    // Add logic to fetch activity based on filterData
-    alert("Fetching activity data based on filters!");
+  const getActivity = async() => {
+    
+    const response=await getUserActivityHandler(filterData,setIsFetching,showAlert);
+    console.log(response);
+    if(response){
+      setActivityData(response.data);
+    }
   };
+
+
+  useEffect(()=>{
+    getActivity();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
   return (
     <Container className="user-activity-page">
-      <PageComponent title={"User Activity"}/>
+      <PageComponent title={"User Activity"} />
       <Row className="mt-5">
         <Col xs={12}>
           <Card className="shadow">
@@ -78,8 +72,8 @@ export const UserActivityPage = () => {
                     <Form.Label>From</Form.Label>
                     <Form.Control
                       type="date"
-                      name="from"
-                      value={filterData.from}
+                      name="fromDate"
+                      value={filterData.fromDate}
                       onChange={handleFilterChange}
                     />
                   </Col>
@@ -87,8 +81,8 @@ export const UserActivityPage = () => {
                     <Form.Label>To</Form.Label>
                     <Form.Control
                       type="date"
-                      name="to"
-                      value={filterData.to}
+                      name="toDate"
+                      value={filterData.toDate}
                       onChange={handleFilterChange}
                     />
                   </Col>
@@ -108,7 +102,7 @@ export const UserActivityPage = () => {
                   <Col xs={12} md={2}>
                     <Form.Label>Type</Form.Label>
                     <DropdownButton
-                      title={filterData.type}
+                      title={filterData.activityType}
                       onSelect={handleTypeChange}
                       variant="outline-primary"
                       className="w-100"
@@ -117,7 +111,12 @@ export const UserActivityPage = () => {
                       <Dropdown.Item eventKey="AdminUpdate">
                         AdminUpdate
                       </Dropdown.Item>
-                      <Dropdown.Item eventKey="Custom">Custom</Dropdown.Item>
+                      <Dropdown.Item eventKey="Auth">Auth</Dropdown.Item>
+                      <Dropdown.Item eventKey="AccountClouser">AccountClouser</Dropdown.Item>
+                      <Dropdown.Item eventKey="BankDetails">BankDetails</Dropdown.Item>
+                      <Dropdown.Item eventKey="SavedAddress">SavedAddress</Dropdown.Item>
+                      
+                      
                     </DropdownButton>
                   </Col>
                   <Col xs={12} md={2}>
@@ -125,40 +124,47 @@ export const UserActivityPage = () => {
                       onClick={getActivity}
                       variant="primary"
                       className="w-100"
+                      disabled={isFetching}
                     >
                       Get Activity
                     </Button>
                   </Col>
                 </Row>
               </div>
-              <Table striped bordered hover responsive>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                    <th>IP Address</th>
-                    <th>Location</th>
-                    <th>Device Type</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {activityData.map((activity) => (
-                    <tr key={activity.id}>
-                      <td>{activity.id}</td>
-                      <td>{activity.date}</td>
-                      <td>{activity.time}</td>
-                      <td>{activity.type}</td>
-                      <td>{activity.description}</td>
-                      <td>{activity.ipAddress}</td>
-                      <td>{activity.location}</td>
-                      <td>{activity.deviceType}</td>
+              {isFetching ? (
+                <div className="d-flex justify-content-center align-items-center">
+                  <Spinner animation="border" variant="primary" />
+                </div>
+              ) : (
+                <Table striped bordered hover responsive>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Type</th>
+                      <th>Description</th>
+                      <th>IP Address</th>
+                      <th>Location</th>
+                      <th>Device Type</th>
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
+                  </thead>
+                  <tbody>
+                    {activityData.map((activity) => (
+                      <tr key={activity.id}>
+                        <td>{activity.id}</td>
+                        <td>{new Date(activity.createdAt).toLocaleDateString()}</td>
+                        <td>{new Date(activity.createdAt).toLocaleTimeString()}</td>
+                        <td>{activity.activityType}</td>
+                        <td>{activity.activityDescription}</td>
+                        <td>{activity.ipAddress}</td>
+                        <td>{activity.location}</td>
+                        <td>{activity.deviceType}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              )}
             </Card.Body>
           </Card>
         </Col>

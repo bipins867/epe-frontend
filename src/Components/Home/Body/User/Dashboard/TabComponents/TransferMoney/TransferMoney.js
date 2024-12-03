@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Row,
@@ -7,49 +7,111 @@ import {
   Form,
   Button,
   Table,
+  Spinner,
 } from "react-bootstrap";
 import "./TransferMoney.css";
 import { PageComponent } from "../../../../../../Utils/Utils";
+import { useAlert } from "../../../../../../UI/Alert/AlertContext";
+import {
+  fetchTransactionHistoryHandler,
+  getPiggyBoxDetailsHandler,
+  transferMoneyHanlder,
+  verifyCustomerHandler,
+} from "./apiHandler";
 
 export const TransferMoneyPage = () => {
+  const [isInfoUpdated, setIsInfoUpdated] = useState(0);
   const [recipientId, setRecipientId] = useState("");
   const [recipientName, setRecipientName] = useState("");
-  const transferHistory = [
-    {
-      id: 1,
-      date: "2024-11-15",
-      time: "09:00 AM",
-      remark: "Gift",
-      amount: 500,
-    },
-    {
-      id: 2,
-      date: "2024-11-16",
-      time: "03:30 PM",
-      remark: "Help",
-      amount: 1000,
-    },
-  ];
+  const [transferAmount, setTransferAmount] = useState("");
+  const [transferRemark, setTransferRemark] = useState("NA");
+  const [isPiggyBoxLoading, setPiggyBoxLoading] = useState(false);
+  const [isVerifying, setVerifying] = useState(false);
+  const [isTransferring, setTransferring] = useState(false);
+  const [isHistoryLoading, setHistoryLoading] = useState(false);
 
-  const piggyBoxDetails = {
-    balance: 10000,
-    unclearedBalance: 2340,
-  };
+  const { showAlert } = useAlert();
 
-  const handleVerifyRecipient = () => {
-    // Mock API call to verify recipient
-    if (recipientId === "C12345") {
-      setRecipientName("John Doe");
-    } else {
-      setRecipientName("Invalid Customer ID");
+  const [transferHistory, setTransferHistory] = useState([]);
+  const [piggyBoxDetails, setPiggyBoxDetails] = useState({
+    balance: 0,
+    unclearedBalance: 0,
+  });
+
+  const handleVerifyRecipient = async () => {
+    if (!recipientId) {
+      return showAlert("error", "Error!", "Please fill all fields correctly!");
+    }
+
+    const response = await verifyCustomerHandler(
+      recipientId,
+      setVerifying,
+      showAlert
+    );
+
+    if (response) {
+      setRecipientName(response.name);
     }
   };
 
-  const handleTransfer = () => {
-    // Add logic for transfer here
-    alert("Transfer Successful!");
+  const handleTransfer = async () => {
+    if (
+      !transferAmount ||
+      !transferRemark ||
+      recipientName === "" ||
+      !recipientId
+    ) {
+      showAlert("error", "Error!", "Please fill all fields correctly!");
+      return;
+    }
+
+    const response = await transferMoneyHanlder(
+      recipientId,
+      transferAmount,
+      recipientName,
+      transferRemark,
+      setTransferring,
+      showAlert
+    );
+
+    if (response) {
+      setIsInfoUpdated(isInfoUpdated + 1);
+    }
   };
 
+  useEffect(() => {
+    const fetchInfo = async () => {
+      const loadPiggyBoxDetails = async () => {
+        const response = await getPiggyBoxDetailsHandler(
+          setPiggyBoxLoading,
+          showAlert
+        );
+        if (response) {
+          setPiggyBoxDetails({
+            balance: response.piggyBalance,
+            unclearedBalance: response.unclearedBalance,
+          });
+        }
+      };
+
+      const loadTransactionHistory = async () => {
+        const response = await fetchTransactionHistoryHandler(
+          setHistoryLoading,
+          showAlert
+        );
+
+        if (response) {
+          setTransferHistory(response);
+        }
+      };
+
+      loadPiggyBoxDetails();
+      loadTransactionHistory();
+    };
+
+    fetchInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isInfoUpdated]);
   return (
     <Container className="transfer-money-page">
       <PageComponent title={"Transfer Money"} />
@@ -59,22 +121,28 @@ export const TransferMoneyPage = () => {
           <Card className="shadow piggybox-card">
             <Card.Body>
               <Card.Title className="text-primary">PiggyBox Details</Card.Title>
-              <Table bordered hover responsive className="mb-0">
-                <tbody>
-                  <tr>
-                    <td>
-                      <strong>Piggy Balance</strong>
-                    </td>
-                    <td>₹{piggyBoxDetails.balance}</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <strong>Uncleared Balance</strong>
-                    </td>
-                    <td>₹{piggyBoxDetails.unclearedBalance}</td>
-                  </tr>
-                </tbody>
-              </Table>
+              {isPiggyBoxLoading ? (
+                <div className="text-center">
+                  <Spinner animation="border" />
+                </div>
+              ) : (
+                <Table bordered hover responsive className="mb-0">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <strong>Piggy Balance</strong>
+                      </td>
+                      <td>₹{piggyBoxDetails.balance}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Uncleared Balance</strong>
+                      </td>
+                      <td>₹{piggyBoxDetails.unclearedBalance}</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              )}
             </Card.Body>
           </Card>
         </Col>
@@ -100,8 +168,16 @@ export const TransferMoneyPage = () => {
                       />
                     </Col>
                     <Col xs={4}>
-                      <Button variant="primary" onClick={handleVerifyRecipient}>
-                        Verify
+                      <Button
+                        variant="primary"
+                        onClick={handleVerifyRecipient}
+                        disabled={isVerifying}
+                      >
+                        {isVerifying ? (
+                          <Spinner as="span" animation="border" size="sm" />
+                        ) : (
+                          "Verify"
+                        )}
                       </Button>
                     </Col>
                   </Row>
@@ -115,15 +191,33 @@ export const TransferMoneyPage = () => {
                 {/* Transfer Amount and Remark */}
                 <Form.Group className="mb-3" controlId="transferAmount">
                   <Form.Label>Amount</Form.Label>
-                  <Form.Control type="number" placeholder="Enter Amount" />
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter Amount"
+                    value={transferAmount}
+                    onChange={(e) => setTransferAmount(e.target.value)}
+                  />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="transferRemark">
                   <Form.Label>Remark</Form.Label>
-                  <Form.Control type="text" placeholder="Enter Remark" />
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Remark"
+                    value={transferRemark}
+                    onChange={(e) => setTransferRemark(e.target.value)}
+                  />
                 </Form.Group>
 
-                <Button variant="success" onClick={handleTransfer}>
-                  Transfer
+                <Button
+                  variant="success"
+                  onClick={handleTransfer}
+                  disabled={isTransferring}
+                >
+                  {isTransferring ? (
+                    <Spinner as="span" animation="border" size="sm" />
+                  ) : (
+                    "Transfer"
+                  )}
                 </Button>
               </Form>
             </Card.Body>
@@ -138,28 +232,42 @@ export const TransferMoneyPage = () => {
             <Card.Body>
               <Card.Title className="text-primary">Transfer History</Card.Title>
               <div className="history-table-container">
-                <Table striped bordered hover responsive>
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Date</th>
-                      <th>Time</th>
-                      <th>Remark</th>
-                      <th>Amount</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {transferHistory.map((entry) => (
-                      <tr key={entry.id}>
-                        <td>{entry.id}</td>
-                        <td>{entry.date}</td>
-                        <td>{entry.time}</td>
-                        <td>{entry.remark}</td>
-                        <td>₹{entry.amount}</td>
+                {isHistoryLoading ? (
+                  <div className="text-center">
+                    <Spinner animation="border" />
+                  </div>
+                ) : (
+                  <Table striped bordered hover responsive>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Remark</th>
+                        <th>Credit</th>
+                        <th>Debit</th>
+                        <th>Balance</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </Table>
+                    </thead>
+                    <tbody>
+                      {transferHistory.map((entry) => (
+                        <tr key={entry.id}>
+                          <td>{entry.id}</td>
+                          <td>
+                            {new Date(entry.createdAt).toLocaleDateString()}
+                          </td>
+                          <td>
+                            {new Date(entry.createdAt).toLocaleTimeString()}
+                          </td>
+                          <td>{entry.remark}</td>
+                          <td>₹{entry.credit}</td>
+                          <td>₹{entry.debit}</td>
+                          <td>₹{entry.balance}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                )}
               </div>
             </Card.Body>
           </Card>

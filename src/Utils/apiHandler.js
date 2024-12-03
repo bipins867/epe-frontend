@@ -64,7 +64,7 @@ export const handleErrors = async (err, showAlert) => {
 
   if (alertMessage) {
     showAlert("error", "Error!", alertMessage, null, () => {
-      if (response.status === 503) {
+      if (response && response.status && response.status === 503) {
         window.location = "/user/auth/login";
       }
     });

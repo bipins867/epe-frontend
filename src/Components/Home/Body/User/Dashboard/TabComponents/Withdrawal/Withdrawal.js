@@ -35,7 +35,7 @@ export const WithdrawalPage = () => {
     // Simulate fetching data from backend
     const fetchData = async () => {
       const response = await getWithdralInfoHandler(setIsLoading, showAlert);
-      console.log(response);
+
       if (response) {
         setSettlementDetails(response.bankDetails);
         setPiggyBoxDetails(response.piggyBoxDetails);
