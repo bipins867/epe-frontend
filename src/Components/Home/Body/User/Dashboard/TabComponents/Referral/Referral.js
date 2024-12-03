@@ -7,6 +7,7 @@ import {
   Button,
   Table,
   Form,
+  Spinner,
 } from "react-bootstrap";
 import {
   FaFacebook,
@@ -18,205 +19,202 @@ import {
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import "./Referral.css";
 import { PageComponent } from "../../../../../../Utils/Utils";
+import { getReferralInfoHandler } from "./apiHandler";
+import { useAlert } from "../../../../../../UI/Alert/AlertContext";
 
 export const ReferralPage = () => {
+  const [referralLink, setReferralLink] = useState("");
+
   const [referrals, setReferrals] = useState({
-    totalReferrals: 120,
-    pendingReferrals: 25,
-    referralHistory: [
-      {
-        id: 1,
-        joinDate: "2024-10-01",
-        customerId: "C12345",
-        name: "John Doe",
-        completionDate: "2024-10-15",
-        status: "Completed",
-      },
-      {
-        id: 2,
-        joinDate: "2024-10-10",
-        customerId: "C12346",
-        name: "Jane Smith",
-        completionDate: "",
-        status: "Pending",
-      },
-    ],
+    totalReferrals: 0,
+    pendingReferrals: 0,
+    referralHistory: [],
   });
+  const [loading, setLoading] = useState(true); // New loading state
+  const { showAlert } = useAlert();
 
   useEffect(() => {
-    setReferrals({
-      totalReferrals: 120,
-      pendingReferrals: 25,
-      referralHistory: [
-        {
-          id: 1,
-          joinDate: "2024-10-01",
-          customerId: "C12345",
-          name: "John Doe",
-          completionDate: "2024-10-15",
-          status: "Completed",
-        },
-        {
-          id: 2,
-          joinDate: "2024-10-10",
-          customerId: "C12346",
-          name: "Jane Smith",
-          completionDate: "",
-          status: "Pending",
-        },
-      ],
-    });
-  }, []);
+    // Simulate an API call to fetch user details
+    const fetchUserDetails = async () => {
+      const response = await getReferralInfoHandler(setLoading, showAlert);
 
-  const referralLink = "https://www.yoursite.com/referral?code=12345"; // Sample referral link
+      if (response) {
+        setReferralLink(response.referralUrl);
+        setReferrals({
+          totalReferrals: response.numberOfReferrals,
+          pendingReferrals: response.pendingReferrals,
+          referralHistory: response.referredUsers,
+        });
+      }
+    };
+
+    fetchUserDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Container className="referral-page">
-      <PageComponent title={"Referral"}/>
-      <Row>
-        <Col xs={12}>
-          <Card>
-            <Card.Body>
-              <Card.Title className="text-primary">
-                Your Referral Link
-              </Card.Title>
-              <div className="referral-link-container">
-                <Form.Control type="text" value={referralLink} readOnly />
-                <CopyToClipboard text={referralLink}>
-                  <Button variant="primary" className="ms-2">
-                    Copy Link
-                  </Button>
-                </CopyToClipboard>
-              </div>
+      <PageComponent title={"Referral"} />
+      {loading ? ( // Show spinner while loading
+        <div className="loading-screen text-center">
+          <Spinner animation="border" role="status" className="loading-spinner">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+          <h4 className="loading-text">Fetching User Details...</h4>
+        </div>
+      ) : (
+        <>
+          <Row>
+            <Col xs={12}>
+              <Card>
+                <Card.Body>
+                  <Card.Title className="text-primary">
+                    Your Referral Link
+                  </Card.Title>
+                  <div className="referral-link-container">
+                    <Form.Control type="text" value={referralLink} readOnly />
+                    <CopyToClipboard text={referralLink}>
+                      <Button variant="primary" className="ms-2">
+                        Copy Link
+                      </Button>
+                    </CopyToClipboard>
+                  </div>
 
-              <div className="share-buttons">
-                <Button
-                  variant="info"
-                  className="share-btn"
-                  onClick={() =>
-                    window.open(
-                      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                        referralLink
-                      )}`,
-                      "_blank"
-                    )
-                  }
-                >
-                  <FaFacebook /> Facebook
-                </Button>
-                <Button
-                  variant="info"
-                  className="share-btn"
-                  onClick={() =>
-                    window.open(
-                      `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-                        referralLink
-                      )}`,
-                      "_blank"
-                    )
-                  }
-                >
-                  <FaTwitter /> Twitter
-                </Button>
-                <Button
-                  variant="info"
-                  className="share-btn"
-                  onClick={() =>
-                    window.open(
-                      `https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(
-                        referralLink
-                      )}`,
-                      "_blank"
-                    )
-                  }
-                >
-                  <FaPinterest /> Pinterest
-                </Button>
-                <Button
-                  variant="info"
-                  className="share-btn"
-                  onClick={() =>
-                    window.open(
-                      `https://wa.me/?text=${encodeURIComponent(referralLink)}`,
-                      "_blank"
-                    )
-                  }
-                >
-                  <FaWhatsapp /> WhatsApp
-                </Button>
-                <Button
-                  variant="info"
-                  className="share-btn"
-                  onClick={() =>
-                    window.open(
-                      `mailto:?subject=Check%20this%20out&body=${encodeURIComponent(
-                        referralLink
-                      )}`,
-                      "_blank"
-                    )
-                  }
-                >
-                  <FaEnvelope /> Email
-                </Button>
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+                  <div className="share-buttons">
+                    <Button
+                      variant="info"
+                      className="share-btn"
+                      onClick={() =>
+                        window.open(
+                          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                            referralLink
+                          )}`,
+                          "_blank"
+                        )
+                      }
+                    >
+                      <FaFacebook /> Facebook
+                    </Button>
+                    <Button
+                      variant="info"
+                      className="share-btn"
+                      onClick={() =>
+                        window.open(
+                          `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+                            referralLink
+                          )}`,
+                          "_blank"
+                        )
+                      }
+                    >
+                      <FaTwitter /> Twitter
+                    </Button>
+                    <Button
+                      variant="info"
+                      className="share-btn"
+                      onClick={() =>
+                        window.open(
+                          `https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(
+                            referralLink
+                          )}`,
+                          "_blank"
+                        )
+                      }
+                    >
+                      <FaPinterest /> Pinterest
+                    </Button>
+                    <Button
+                      variant="info"
+                      className="share-btn"
+                      onClick={() =>
+                        window.open(
+                          `https://wa.me/?text=${encodeURIComponent(
+                            referralLink
+                          )}`,
+                          "_blank"
+                        )
+                      }
+                    >
+                      <FaWhatsapp /> WhatsApp
+                    </Button>
+                    <Button
+                      variant="info"
+                      className="share-btn"
+                      onClick={() =>
+                        window.open(
+                          `mailto:?subject=Check%20this%20out&body=${encodeURIComponent(
+                            referralLink
+                          )}`,
+                          "_blank"
+                        )
+                      }
+                    >
+                      <FaEnvelope /> Email
+                    </Button>
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
 
-      {/* Referral Statistics */}
-      <Row className="my-4">
-        <Col xs={12} md={6}>
-          <Card>
-            <Card.Body>
-              <Card.Title className="text-primary">
-                Referral Statistics
-              </Card.Title>
-              <p>
-                <strong>Total Referrals:</strong> {referrals.totalReferrals}
-              </p>
-              <p>
-                <strong>Pending Referrals:</strong> {referrals.pendingReferrals}
-              </p>
-            </Card.Body>
-          </Card>
-        </Col>
+          {/* Referral Statistics */}
+          <Row className="my-4">
+            <Col xs={12} md={6}>
+              <Card>
+                <Card.Body>
+                  <Card.Title className="text-primary">
+                    Referral Statistics
+                  </Card.Title>
+                  <p>
+                    <strong>Total Referrals:</strong> {referrals.totalReferrals}
+                  </p>
+                  <p>
+                    <strong>Pending Referrals:</strong>{" "}
+                    {referrals.pendingReferrals}
+                  </p>
+                </Card.Body>
+              </Card>
+            </Col>
 
-        {/* Referral History */}
-        <Col xs={12}>
-          <Card>
-            <Card.Body>
-              <Card.Title className="text-primary">Referral History</Card.Title>
-              <div className="referral-history-table-container">
-                <Table striped bordered hover responsive>
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Date of Joining</th>
-                      <th>Customer ID</th>
-                      <th>Name</th>
-                      <th>Date of Completion</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {referrals.referralHistory.map((referral) => (
-                      <tr key={referral.id}>
-                        <td>{referral.id}</td>
-                        <td>{referral.joinDate}</td>
-                        <td>{referral.customerId}</td>
-                        <td>{referral.name}</td>
-                        <td>{referral.completionDate || "N/A"}</td>
-                        <td>{referral.status}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+            {/* Referral History */}
+            <Col xs={12}>
+              <Card>
+                <Card.Body>
+                  <Card.Title className="text-primary">
+                    Referral History
+                  </Card.Title>
+                  <div className="referral-history-table-container">
+                    <Table striped bordered hover responsive>
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Date of Joining</th>
+                          <th>Customer ID</th>
+                          <th>Name</th>
+                          <th>Date of Completion</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {referrals.referralHistory.map((referral) => (
+                          <tr key={referral.id}>
+                            <td>{referral.id}</td>
+                            <td>{new Date(referral.dateOfJoining).toLocaleDateString()}</td>
+                            <td>{referral.candidateId}</td>
+                            <td>{referral.name}</td>
+                            <td>{new Date(referral.dateOfCompletion ).toLocaleDateString()|| "N/A"}</td>
+                            <td>{referral.status}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </Table>
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </>
+      )}
     </Container>
   );
 };

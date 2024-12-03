@@ -32,6 +32,7 @@ export const SignUpPage = () => {
 
   useEffect(() => {
     const verifyReferral = async (referralId) => {
+      console.log(referralId);
       const response = await verifyReferralHandler(referralId, setIsReferralLoading, showAlert);
       if (response && response.data) {
         setCandidateId(response.data.candidateId);

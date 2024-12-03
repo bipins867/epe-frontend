@@ -24,7 +24,7 @@ export const verifyReferralHandler = async (
   showAlert
 ) => {
   const obj = { referralId:referralID };
-  const url = "/user/piggyBox/referral/post/userReferralInfo";
+  const url = "/user/piggyBox/referral/userReferralInfo";
 
   try {
     const result = await apiRequest(url, obj, "", "post");
