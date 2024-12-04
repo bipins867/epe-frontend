@@ -1,0 +1,36 @@
+/* Container styling for the tabbed page */
+.tabbed-page-container {
+  margin-top: 20px;
+}
+
+/* Custom styling for the tabs */
+.custom-tabs .nav-link {
+  font-weight: bold;
+  color: #555;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  margin-right: 5px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-tabs .nav-link.active {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* Hover effect for tabs */
+.custom-tabs .nav-link:hover {
+  color: #007bff;
+  background-color: #e9ecef;
+}
+
+/* Custom styling for the tab content */
+.custom-tab-content {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}

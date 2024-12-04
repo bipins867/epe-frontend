@@ -1,0 +1,25 @@
+.edit-kyc-page {
+    margin-top: 20px;
+  }
+  
+  .img-thumbnail {
+    width: auto;
+    height: 150px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+  }
+  
+  .image-section {
+    margin-top: 20px;
+  }
+  
+  .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  .alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  

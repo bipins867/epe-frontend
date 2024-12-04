@@ -29,7 +29,7 @@ export const KycPage = () => {
   };
 
   useEffect(() => {
-    setStatus("completed");
+    setStatus("pending");
   }, []);
 
   return (
