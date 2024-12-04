@@ -150,9 +150,9 @@ export const UserActivityPage = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {activityData.map((activity) => (
-                      <tr key={activity.id}>
-                        <td>{activity.id}</td>
+                    {activityData.map((activity,index) => (
+                      <tr key={index+1}>
+                        <td>{index+1}</td>
                         <td>{new Date(activity.createdAt).toLocaleDateString()}</td>
                         <td>{new Date(activity.createdAt).toLocaleTimeString()}</td>
                         <td>{activity.activityType}</td>

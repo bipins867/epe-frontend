@@ -253,9 +253,9 @@ export const WithdrawalPage = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {withdrawalHistory.map((entry) => (
-                          <tr key={entry.id}>
-                            <td>{entry.id}</td>
+                        {withdrawalHistory.map((entry,index) => (
+                          <tr key={index+1}>
+                            <td>{index+1}</td>
                             <td>{entry.requestId}</td>
                             <td>
                               {new Date(entry.createdAt).toLocaleDateString()}

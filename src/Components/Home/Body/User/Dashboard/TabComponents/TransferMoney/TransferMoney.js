@@ -250,9 +250,9 @@ export const TransferMoneyPage = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {transferHistory.map((entry) => (
-                        <tr key={entry.id}>
-                          <td>{entry.id}</td>
+                      {transferHistory.map((entry,index) => (
+                        <tr key={index+1}>
+                          <td>{index+1}</td>
                           <td>
                             {new Date(entry.createdAt).toLocaleDateString()}
                           </td>

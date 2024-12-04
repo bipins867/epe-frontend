@@ -196,9 +196,9 @@ export const ReferralPage = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {referrals.referralHistory.map((referral) => (
-                          <tr key={referral.id}>
-                            <td>{referral.id}</td>
+                        {referrals.referralHistory.map((referral,index) => (
+                          <tr key={index+1}>
+                            <td>{index+1}</td>
                             <td>{new Date(referral.dateOfJoining).toLocaleDateString()}</td>
                             <td>{referral.candidateId}</td>
                             <td>{referral.name}</td>

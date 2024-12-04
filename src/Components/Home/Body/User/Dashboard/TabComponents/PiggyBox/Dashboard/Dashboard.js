@@ -178,6 +178,7 @@ export const DashboardPage = () => {
                       <Table striped bordered hover responsive="sm">
                         <thead>
                           <tr>
+                            <th>#</th>
                             <th>Date</th>
                             <th>Time</th>
                             <th>Transaction ID</th>
@@ -190,7 +191,8 @@ export const DashboardPage = () => {
                         </thead>
                         <tbody>
                           {transactions.map((txn, index) => (
-                            <tr key={index}>
+                            <tr key={index+1}>
+                              <td>{index+1}</td>
                               <td>
                                 {new Date(txn.createdAt).toLocaleDateString()}
                               </td>
