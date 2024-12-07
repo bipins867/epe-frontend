@@ -22,6 +22,18 @@ export const apiRequest = async (url, obj = {}, token = "", type = "get") => {
   return result; // Return only the response data
 };
 
+export const apiUploadRequest = async (url, obj = {}, token = "") => {
+  const completeUrl = `${baseUrl}${url}`;
+  const headers = {
+    Authorization: token || "", // Fallback for optional token
+    "Content-Type": "multipart/form-data", // Standard for API requests
+  };
+
+  const result = await axios.post(completeUrl, obj, { headers });
+
+  return result; // Return only the response data
+};
+
 export const handleErrors = async (err, showAlert) => {
   // Declare variables
   let logMessage = null;

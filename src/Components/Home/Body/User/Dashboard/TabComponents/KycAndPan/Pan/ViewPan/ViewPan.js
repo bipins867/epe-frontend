@@ -1,33 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { Container, Card, Spinner, Row, Col } from "react-bootstrap";
+import { Container, Card, Row, Col } from "react-bootstrap";
 import "./ViewPan.css";
+import { baseUrl } from "../../../../../../../../../Utils/config";
 
-export const ViewPanPage = () => {
-  const [panData, setPanData] = useState(null);
-  const [loading, setLoading] = useState(true);
+export const ViewPanPage = ({ panDetails }) => {
+  const [panData, setPanData] = useState({
+    status: "Review",
+    panNumber: "",
+    panImage: "https://via.placeholder.com/150",
+  });
 
   // Simulate fetching PAN data
   useEffect(() => {
-    setTimeout(() => {
+    if (panDetails && panDetails.pan) {
+      const pan = panDetails.pan;
       setPanData({
-        status: "Pending", // Can be "Pending", "Accepted", "Rejected"
-        panNumber: "ABCDE1234F",
-        panImage: "https://via.placeholder.com/150", // Placeholder image
+        status: pan.panStatus,
+        panNumber: pan.panNumber,
+        panImage: baseUrl + pan.panUrl,
       });
-      setLoading(false);
-    }, 2000); // Simulate API call
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  if (loading) {
-    return (
-      <div className="loading-screen text-center">
-        <Spinner animation="border" role="status" className="loading-spinner">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-        <h4 className="loading-text">Fetching PAN Details...</h4>
-      </div>
-    );
-  }
 
   return (
     <Container className="view-pan-page py-4">

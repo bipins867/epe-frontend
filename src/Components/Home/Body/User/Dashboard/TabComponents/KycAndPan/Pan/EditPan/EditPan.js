@@ -1,24 +1,45 @@
-import React, { useState, useEffect } from "react";
-import { Container, Card, Form, Button, Row, Col, Spinner, Alert } from "react-bootstrap";
+import React, { useState, useEffect, useRef } from "react";
+import {
+  Container,
+  Card,
+  Form,
+  Button,
+  Row,
+  Col,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
 import "./EditPan.css";
+import { useAlert } from "../../../../../../../../UI/Alert/AlertContext";
+import { baseUrl } from "../../../../../../../../../Utils/config";
+import { updatePanDetailsHandler } from "../../apiHandler";
 
-export const EditPanPage = () => {
-  const [panData, setPanData] = useState(null);
-  const [loading, setLoading] = useState(true);
+export const EditPanPage = ({ panDetails }) => {
+  const [panData, setPanData] = useState({
+    status: "",
+    panNumber: "",
+    adminMessageForPan: "",
+    panUrl: "https://via.placeholder.com/150",
+  });
   const [submitting, setSubmitting] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const { showAlert } = useAlert();
+
+  const panRef = useRef();
 
   // Simulate fetching PAN data
   useEffect(() => {
-    setTimeout(() => {
+    if (panDetails && panDetails.pan) {
+      const pan = panDetails.pan;
+
       setPanData({
-        status: "Rejected", // Can be "Pending", "Accepted", "Rejected"
-        panNumber: "ABCDE1234F",
-        panImage: "https://via.placeholder.com/150", // Placeholder image
-        adminRemark: "Pan Image is not Clear", // Example: "Invalid PAN image uploaded."
+        status: pan.panStatus || "Pending",
+        panNumber: pan.panNumber,
+        adminMessageForPan: pan.adminMessageForPan,
+        panUrl: baseUrl + pan.panUrl,
       });
-      setLoading(false);
-    }, 2000); // Simulate API call
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleImageChange = (e) => {
@@ -28,25 +49,24 @@ export const EditPanPage = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      alert("PAN details submitted successfully!");
-    }, 2000); // Simulate submission
-  };
+  
+    const formData = new FormData();
 
-  if (loading) {
-    return (
-      <div className="loading-screen text-center">
-        <Spinner animation="border" role="status" className="loading-spinner">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-        <h4 className="loading-text">Fetching PAN Details...</h4>
-      </div>
+    formData.append("panNumber", panData.panNumber);
+    formData.append("panFile", panRef.current.files[0]);
+
+    const response = await updatePanDetailsHandler(
+      formData,
+      setSubmitting,
+      showAlert
     );
-  }
+
+    if (response) {
+      showAlert("info", "Info!", "Pan Details Submitted Successfully!");
+    }
+  };
 
   return (
     <Container className="edit-pan-page py-4">
@@ -54,7 +74,7 @@ export const EditPanPage = () => {
         <h3 className="text-center mb-4">Edit PAN Details</h3>
         {panData.status === "Rejected" && (
           <Alert variant="danger" className="text-center">
-            <strong>Admin Remark:</strong> Invalid PAN image uploaded.
+            <strong>Admin Remark:</strong> {panData.adminMessageForPan}
           </Alert>
         )}
         <Form onSubmit={handleSubmit}>
@@ -75,9 +95,15 @@ export const EditPanPage = () => {
                 <Form.Label>PAN Number</Form.Label>
                 <Form.Control
                   type="text"
-                  defaultValue={panData.panNumber}
+                  value={panData.panNumber} // Bind value to state
                   placeholder="Enter PAN Number"
                   required
+                  onChange={(e) =>
+                    setPanData((prevData) => ({
+                      ...prevData,
+                      panNumber: e.target.value,
+                    }))
+                  }
                 />
               </Form.Group>
             </Col>
@@ -88,13 +114,14 @@ export const EditPanPage = () => {
                 <Form.Label>PAN Image</Form.Label>
                 <div className="image-upload-container">
                   <img
-                    src={selectedImage || panData.panImage}
+                    src={selectedImage || panData.panUrl}
                     alt="PAN Preview"
                     className="img-fluid pan-image-preview"
                   />
                   <Form.Control
                     type="file"
                     accept="image/*"
+                    ref={panRef}
                     onChange={handleImageChange}
                     className="mt-3"
                   />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Row,
@@ -16,19 +16,20 @@ import {
   setUserAuthToken,
   userLogOut,
 } from "../../../../../../../../Store/User/auth";
+import { useAlert } from "../../../../../../../UI/Alert/AlertContext";
+import { getUserDetails } from "./apiHandler";
+import { baseUrl } from "../../../../../../../../Utils/config";
 
 export const DashboardPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+
   const dummyUser = {
     name: "John Doe",
     customerId: "CUST12345",
     kycStatus: "Approved",
-    email: "john.doe@example.com",
-    phone: "9876543210",
-    piggyBoxBalance: 12543.67,
-    profileImage:
+      profileImage:
       "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg",
     userDetails: {
       gender: "Male",
@@ -48,9 +49,6 @@ export const DashboardPage = () => {
     name,
     customerId,
     kycStatus,
-    email,
-    phone,
-    piggyBoxBalance,
     profileImage,
     userDetails,
   } = dummyUser;
@@ -59,6 +57,32 @@ export const DashboardPage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedDetails, setEditedDetails] = useState(userDetails);
   const [submitting, setSubmitting] = useState(false);
+    const {showAlert}=useAlert();
+
+
+    useEffect(()=>{
+
+      const fetchUserDetails=async()=>{
+
+        const response=await getUserDetails(setIsLoading,showAlert);
+
+        if(response){
+          const userDetails=response.userDetails;//this will be containing userDetails
+          const userKyc=response.userKyc;
+          
+          const candidateId=response.candidateId;
+          const kycStatus=userKyc.status;
+          const profileImage=baseUrl+userKyc.userUrl
+          const name=response.name;
+
+        }
+
+      }
+
+      fetchUserDetails();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
+
 
   const logoutHandler = (e) => {
     e.preventDefault();
@@ -138,7 +162,7 @@ export const DashboardPage = () => {
               <h3>{name}</h3>
               <p className="text-muted">Customer ID: {customerId}</p>
               <Badge
-                bg={kycStatus === "Approved" ? "success" : "warning"}
+                bg={kycStatus === "Verified" ? "success" : "warning"}
                 className="kyc-status-badge"
               >
                 KYC: {kycStatus}
