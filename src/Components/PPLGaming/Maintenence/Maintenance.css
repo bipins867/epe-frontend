@@ -1,0 +1,46 @@
+/* MaintenancePage.css */
+
+.epe-maintenance-container {
+    background-color: #f8f9fa;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.epe-maintenance-header {
+    margin-bottom: 20px;
+}
+
+.epe-maintenance-logo {
+    max-width: 150px;
+}
+
+.epe-maintenance-content {
+    margin-bottom: 30px;
+}
+
+.epe-maintenance-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.epe-maintenance-message {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin: 20px 0;
+}
+
+.epe-maintenance-button {
+    font-size: 1rem;
+    padding: 10px 20px;
+}
+
+.epe-maintenance-footer-text {
+    font-size: 1rem;
+    color: #6c757d;
+}

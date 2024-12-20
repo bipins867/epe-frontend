@@ -1,0 +1,18 @@
+.transaction-page-description {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin: 10px 0;
+  }
+  
+  .transaction-page-timer {
+    font-size: 1rem;
+    color: #007bff;
+    margin-top: 20px;
+  }
+  
+  .transaction-page-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+  }
+  
